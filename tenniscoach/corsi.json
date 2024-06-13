@@ -3,7 +3,7 @@
         {
             "titolo": "Fondamenti del Tennis per Principianti",
             "descrizione": "Un corso introduttivo pensato per i principianti, che copre i fondamenti del tennis, inclusi impugnature, colpi e movimenti di base.",
-            "prezzo": "19.99 €",
+            "prezzo": 19.99,
             "lezioni": [
                 {
                     "titolo": "Introduzione al Tennis",
@@ -26,7 +26,7 @@
         {
             "titolo": "Tecniche Avanzate di Tennis",
             "descrizione": "Questo corso è dedicato ai giocatori avanzati che vogliono perfezionare le loro tecniche e strategie di gioco.",
-            "prezzo": "34.99 €",
+            "prezzo": 34.99,
             "lezioni": [
                 {
                     "titolo": "Servizi Avanzati",
@@ -53,7 +53,7 @@
         {
             "titolo": "Preparazione Mentale per il Tennis",
             "descrizione": "Scopri come prepararti mentalmente per le partite di tennis, gestire lo stress e migliorare la concentrazione in campo.",
-            "prezzo": "22.99 €",
+            "prezzo": 22.99,
             "lezioni": [
                 {
                     "titolo": "Introduzione alla Preparazione Mentale",
@@ -76,7 +76,7 @@
         {
             "titolo": "Strategie di Gioco per Principianti",
             "descrizione": "Impara le strategie di base per migliorare il tuo gioco, dalla posizione in campo alle tattiche per vincere i punti.",
-            "prezzo": "18.99 €",
+            "prezzo": 18.99,
             "lezioni": [
                 {
                     "titolo": "Posizionamento in Campo",
@@ -99,7 +99,7 @@
         {
             "titolo": "Servizio e Risposta: Migliora il Tuo Gioco",
             "descrizione": "Un corso focalizzato sul miglioramento del servizio e della risposta, con tecniche per aumentare precisione e potenza.",
-            "prezzo": "29.99 €",
+            "prezzo": 29.99,
             "lezioni": [
                 {
                     "titolo": "Tecniche di Servizio",
@@ -114,7 +114,7 @@
         {
             "titolo": "Allenamento Fisico per Tennisti",
             "descrizione": "Un programma di allenamento fisico specifico per tennisti, per migliorare forza, resistenza e agilità.",
-            "prezzo": "24.99 €",
+            "prezzo": 24.99,
             "lezioni": [
                 {
                     "titolo": "Riscaldamento e Stretching",
@@ -141,7 +141,7 @@
         {
             "titolo": "Tecniche di Difesa nel Tennis",
             "descrizione": "Impara come difenderti efficacemente in campo, mantenendo la calma sotto pressione e contrattaccando con successo.",
-            "prezzo": "21.99 €",
+            "prezzo": 21.99,
             "lezioni": [
                 {
                     "titolo": "Difesa di Base",
@@ -164,7 +164,7 @@
         {
             "titolo": "Gioco di Volée: Domina la Rete",
             "descrizione": "Un corso completo per migliorare il gioco di volée, con esercizi specifici per precisione e reattività a rete.",
-            "prezzo": "27.99 €",
+            "prezzo": 27.99,
             "lezioni": [
                 {
                     "titolo": "Introduzione al Gioco di Volée",
@@ -187,7 +187,7 @@
         {
             "titolo": "Tennis per Bambini: Divertimento e Apprendimento",
             "descrizione": "Un corso pensato per i bambini, per avvicinarli al tennis in modo divertente e educativo, sviluppando le loro abilità di base.",
-            "prezzo": "15.99 €",
+            "prezzo": 15.99,
             "lezioni": [
                 {
                     "titolo": "Introduzione al Tennis per Bambini",
@@ -210,7 +210,7 @@
         {
             "titolo": "Tecniche di Ritorno del Servizio",
             "descrizione": "Migliora le tue abilità nel ritornare il servizio con tecniche avanzate e esercizi specifici per ogni tipo di servizio.",
-            "prezzo": "26.99 €",
+            "prezzo": 26.99,
             "lezioni": [
                 {
                     "titolo": "Analisi del Servizio Avversario",
@@ -233,7 +233,7 @@
         {
             "titolo": "Approccio Mentale: Vincere con la Mente",
             "descrizione": "Scopri le tecniche mentali per mantenere la calma, aumentare la fiducia in te stesso e gestire la pressione durante le partite.",
-            "prezzo": "23.99 €",
+            "prezzo": 23.99,
             "lezioni": [
                 {
                     "titolo": "Introduzione alla Psicologia del Tennis",
@@ -256,7 +256,7 @@
         {
             "titolo": "Dritto Vincente: Impara il Colpo Base del Tennis",
             "descrizione": "Migliora il tuo dritto con questo corso completo che ti insegnerà la tecnica corretta passo dopo passo. Imparerai la presa, la posizione del corpo, il movimento del braccio e come generare potenza e topspin. Il corso include 8 lezioni video HD e una sessione di domande e risposte con un maestro di tennis.",
-            "prezzo": "29.99 €",
+            "prezzo": 29.99,
             "lezioni": [
                 {
                     "titolo": "Introduzione e Riscaldamento",
@@ -295,7 +295,7 @@
         {
             "titolo": "Rovescio Perfetto: Domina il Colpo Difensivo del Tennis",
             "descrizione": "Impara il rovescio a due mani come i professionisti con questo corso dettagliato. Ti guideremo attraverso la tecnica corretta, dalla presa e la posizione del corpo al movimento del braccio e la generazione di topspin. Il corso include 6 lezioni video HD e un bonus speciale: un allenamento per il rovescio con una macchina lanciapalle.",
-            "prezzo": "39.99 €",
+            "prezzo": 39.99,
             "lezioni": [
                 {
                     "titolo": "Introduzione e Riscaldamento",
@@ -330,7 +330,7 @@
         {
             "titolo": "Dritto Vincente: Maestro del Colpo Base",
             "descrizione": "Migliora il tuo dritto con questo corso completo e diventa un maestro del colpo base del tennis. Imparerai la tecnica corretta passo dopo passo, dalla presa alla posizione del corpo, dal movimento del braccio alla generazione di potenza e topspin. Il corso include 8 lezioni video HD e una sessione di domande e risposte con un maestro di tennis.",
-            "prezzo": "29.99 €",
+            "prezzo": 29.99,
             "lezioni": [
                 {
                     "titolo": "Introduzione e Riscaldamento",
@@ -369,7 +369,7 @@
         {
             "titolo": "Rovescio Implacabile: Domina il Colpo Difensivo",
             "descrizione": "Impara il rovescio a due mani come i professionisti con questo corso dettagliato e trasforma il tuo colpo difensivo in un'arma implacabile. Ti guideremo attraverso la tecnica corretta, dalla presa e la posizione del corpo al movimento del braccio e la generazione di topspin. Il corso include 6 lezioni video HD e un bonus speciale: un allenamento per il rovescio con una macchina lanciapalle.",
-            "prezzo": "39.99 €",
+            "prezzo": 39.99,
             "lezioni": [
                 {
                     "titolo": "Introduzione e Riscaldamento",
@@ -404,7 +404,7 @@
         {
             "titolo": "Tennis Pratico 101",
             "descrizione": "Un corso introduttivo che copre le basi del tennis, inclusi servizio, rovescio, colpo di diritto e molto altro.",
-            "prezzo": "19.99 €",
+            "prezzo": 19.99,
             "lezioni": [
                 {
                     "titolo": "Introduzione al servizio",
@@ -419,7 +419,7 @@
         {
             "titolo": "Mentalità del Tennis",
             "descrizione": "Questo corso esplora l'aspetto mentale del tennis, insegnando tecniche per rimanere concentrati e gestire la pressione.",
-            "prezzo": "29.99 €",
+            "prezzo": 29.99,
             "lezioni": [
                 {
                     "titolo": "Gestione dello stress in partita",
@@ -438,7 +438,7 @@
         {
             "titolo": "Tecniche Avanzate di Tennis",
             "descrizione": "Per i giocatori più esperti, questo corso copre tecniche avanzate per migliorare il tuo gioco.",
-            "prezzo": "39.99 €",
+            "prezzo": 39.99,
             "lezioni": [
                 {
                     "titolo": "Servizio Avanzato",
