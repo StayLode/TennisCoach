@@ -1,5 +1,4 @@
-{
-    "corsi": [
+[
         {
             "titolo": "Fondamenti del Tennis per Principianti",
             "descrizione": "Un corso introduttivo pensato per i principianti, che copre i fondamenti del tennis, inclusi impugnature, colpi e movimenti di base.",
@@ -1010,4 +1009,3 @@
         }
 
     ]
-}
