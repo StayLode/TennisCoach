@@ -11,8 +11,10 @@
     width: 100px;
     transition: all 0.5s;
     cursor: pointer;
-    margin: 5px;
+    margin-right: 10px;
     
+    margin-top: 10px;
+    padding-bottom: 10px;
     font-weight: bold;
   }
   
@@ -41,6 +43,7 @@
   .btn:hover{
     background-color: #ebf562;
     
+    color: #343a40;
   }
   
   .btn:hover span:after {
@@ -65,4 +68,105 @@
   height:500px; 
   background-size:cover; 
   background-position: center;
+}
+.n_text{
+  color: #a2a6aa
+}
+
+.card{
+  background-color: #a2a6aa;
+  border: 2px solid #eab621;
+  border-radius: 5px;
+}
+.image-course{
+  background-size:cover; 
+  background-position: center;
+}
+
+.card-custom{
+  width: 400px;
+  overflow: hidden;
+}
+.img-course{
+  width: 100%; /* Assicura che l'immagine riempia la larghezza della card */
+  height: 250px; /* Fissa l'altezza dell'immagine */
+  object-fit: cover; /* Mantiene l'immagine proporzionata e centrata */
+  
+  border-radius: 4px;
+  border: 1px solid #eab621;
+}
+
+.price-label{
+  padding: 8px 12px;
+  
+  border: 1px solid #eab621;
+  border-radius: 4px;
+  color: #495057;
+  background-color: #fff;
+}
+.btn-search{
+  padding: 12px;
+  border-radius: 4px;
+  
+  margin-top: 0px;
+}
+.my-checkbox{
+  border: 2px solid #495057;
+}
+.my-checkbox:checked {
+  background-color: #eab621;
+  border-color:  #eab621;
+  color: #495057;
+}
+
+.form-check-label {
+  margin-right: 2em;
+}
+.form-check-input:focus{
+  box-shadow: 0 0 0 2px #eab621; /* Alone giallo */
+}
+
+.video-body{
+  background-color: #d2d6d9
+}
+
+.body-lesson{
+  
+  border-radius: 4px;
+}
+
+.coach-profile{
+  
+  margin-right: 1em;
+}
+
+.custom-footer{
+  color: #eab621;
+}
+.dropdown-toggle::after {
+  border-top-color: #eab621; /* Cambia il colore della freccetta */
+}
+
+.dropdown-menu {
+  top: 100%;
+  left: 0;
+  transform: translateY(0);
+  background-color: #343a40; /* Background scuro */
+  color: #d2d6d9; /* Testo bianco */
+  z-index: 1050; /* Aumenta il valore di z-index per sovrapporre altri elementi */
+
+}
+
+.dropdown-menu .dropdown-item {
+  color: #d2d6d9; /* Testo bianco per gli elementi del menu */
+}
+
+.dropdown-menu .dropdown-item:hover {
+  background-color: #343a40; /* Colore di sfondo al passaggio del mouse */
+  color: #fff
+}
+
+.alert-custom{
+  background-color: #a2a6aa;
+  border: 2px solid #eab621;
 }

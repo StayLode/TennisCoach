@@ -39,7 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'crispy_forms',
-    'crispy_bootstrap5'
+    'crispy_bootstrap5',
+    "essential",
+    "users"
 ]
 
 MIDDLEWARE = [
@@ -129,5 +131,8 @@ STATICFILES_DIRS = [os.path.join(MEDIA_ROOT, 'static/'), MEDIA_ROOT]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
-CRISPY_TEMPLATE_PACK = "bootstrap4"
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+LOGIN_REDIRECT_URL = "/?login=ok" #redireziona alla home, ma con un parametro GET
+LOGIN_URL = "/login/?auth=notok" #redireziona al login, ma con un parametro GET

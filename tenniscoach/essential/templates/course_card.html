@@ -1,0 +1,20 @@
+{%load static%}
+
+<div class="card shadow-sm card-custom" data-toggle="tooltip" data-placement="top" title="{{c.description}}">
+    <img src="{% static c.picture%}" class="img-fluid rounded-start img-course">
+    <div class="card-body">
+        <p class="card-text">{{c.getTitle}}</p>
+        <p class="card-text">{{c.category}}</p>
+        <div class="d-flex justify-content-between align-items-center">
+        <div class="btn-group">
+            <a type="button" class="btn btn-sm btn-outline-secondary" href = "{% url 'essential:corso' c.pk %}">Vedi</a>
+        </div>
+        {% if c.isFree %}
+            <h6 class="card-text">Gratis</h6>
+        {% else %}                        
+            <h6 class="card-text">{{c.price}}€</h6>
+        {% endif %}
+        <h6 class="text-muted">Coach: {{c.user}}</h6>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% load custom_filter %}
+{% block title %} Dettagli di {{ object.title }} {% endblock %}
+
+{% block content %}
+<br>
+<div class="container">
+   
+    
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div id="message-alert" class="alert alert-custom alert-dismissible fade show" role="alert" style="display:none;">
+                    <a href="#" class="btn btn-warning btn-sm" onclick="closeAlert(event)" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </a>
+                    <span id="message-content"></span>
+                </div>
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <!-- Pulsanti sopra il titolo del corso -->
+                    <div>
+                        <button class= "btn" onclick='window.history.go(-1)'>Torna indietro</button>
+                        {% if user.is_authenticated and not saved_by_current_user %}
+                            <!-- Mostra pulsanti solo se il corso non è stato salvato -->
+                            {% if object.price != 0 %}
+                                <a href="#" class="btn btn-primary" onclick="purchaseCourse(event)">Acquista</a>
+                            {% else %}
+                                <a href="{% url 'essential:save_course' object.pk %}" class="btn btn-primary">Salva</a>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                    <h5 class="mb-0">{{ object.title }}</h5>
+                    <!-- Immagine del corso -->
+                    <img src="{% static object.picture %}" alt="Immagine del corso" class="img-fluid rounded" style="max-width: 150px;">
+                </div>
+                <div class="card-body">
+                    <!-- Dettagli del corso -->
+                    <ul class="list-group list-group-flush body-lesson">
+                        <li class="list-group-item"><strong>Descrizione:</strong> {{ object.description }}</li>
+                        <li class="list-group-item"><strong>Livello:</strong> {{ object.category }}</li>
+                        <li class="list-group-item"><strong>Prezzo:</strong> {% if object.isFree %}Gratis{% else %}{{ object.price }}€{%endif%}</li>
+                        <!-- Aggiungi altri campi del corso qui -->
+                    </ul>
+                </div>
+                <!-- Lezioni come card -->
+                <div class="card-body">
+                    <h6 class="card-title">Lezioni:</h6>
+                    {% for lesson in lessons %}
+                        {% if user.is_authenticated and saved_by_current_user %}
+                            <!-- Mostra il link al modal solo se il corso è stato salvato -->
+                            <a href="" class="text-decoration-none text-dark" data-bs-toggle="modal" data-bs-target="#videoModal{{ lesson.pk }}">
+                        {% endif %}
+                        <div class="card mb-2">
+                            <div class="card-body d-flex justify-content-between video-body">
+                                <span>{{ lesson.title }}</span>
+                                <span>{{ lesson.duration|format_timedelta }}</span>
+                            </div>
+                        </div>
+                        <!-- Modal per il video della lezione -->
+                        <div class="modal fade" id="videoModal{{ lesson.pk }}" tabindex="-1" aria-labelledby="videoModalLabel{{ lesson.pk }}" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="videoModalLabel{{ lesson.pk }}">{{ lesson.title }}</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <video controls controlsList="nodownload" class="w-100">
+                                            <source src="{% static lesson.videos %}" type="video/mp4">
+                                            Il tuo browser non supporta la visualizzazione di video.
+                                        </video>
+                                    </div>
+                                   
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Fine Modal -->
+                    {% endfor %}
+                </div>
+                <div class="card-footer d-flex justify-content-center align-items-center">
+                    <!-- Testo dell'utente del coach -->
+                    <div class="ml-3">
+                        <a>Creato da:</a>
+                        <a class="coach-profile" href="{{ object.user.get_absolute_url }}"> {{ coach.user }}</a>
+                    </div>
+                    <!-- Immagine profilo -->
+                    <img src="{% static coach.picture %}" alt="Immagine profilo" class="rounded-circle mr-3" style="width: 50px; height: 50px;">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+
+<script>
+    function saveCourse(event, courseId) {
+        event.preventDefault();
+        fetch(`/save_course/${courseId}/`, {
+            method: "GET",
+            headers: {
+                "X-Requested-With": "XMLHttpRequest"
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            const alertBox = document.getElementById('message-alert');
+            const alertContent = document.getElementById('message-content');
+            alertContent.innerHTML = data.message;
+            alertBox.style.display = 'block';
+        })
+        .catch(error => console.error('Error:', error));
+    }
+    function closeAlert() {
+        const alertBox = document.getElementById('message-alert');
+        alertBox.style.display = 'none';
+    }
+    
+    // Function to stop video when modal is closed
+    document.addEventListener('DOMContentLoaded', function() {
+        var modals = document.querySelectorAll('.modal');
+        modals.forEach(function(modal) {
+            modal.addEventListener('hidden.bs.modal', function(event) {
+                var video = modal.querySelector('video');
+                if (video) {
+                    video.pause();
+                    video.currentTime = 0;
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}
