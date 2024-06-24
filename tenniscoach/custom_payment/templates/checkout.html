@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% block title %} Checkout {% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-body">
+            <h2 class="card-title"><strong>Checkout - {{ course.title }}</strong></h2>
+        </div>
+        <div class="card-body">
+            <!-- Campo per il nome del proprietario della carta -->
+            <div class="form-group mb-3">
+                <label for="cardholder-name">Titolare della carta</label>
+                <input type="text" id="cardholder-name" name="cardholder_name" class="form-control" placeholder="Nome titolare della carta" required>
+            </div>
+
+            <form id="payment-form" method="post">
+                {% csrf_token %}
+
+                <!-- Campo nascosto per l'id del corso -->
+                <input type="hidden" name="course_id" value="{{ object.pk }}">
+
+                <div class="form-group mb-3">
+                    <label for="card-element">Dettagli della carta di credito</label>
+                    <div id="card-element" class="form-control">
+                        <!-- Stripe Elements verrà inserito qui. -->
+                    </div>
+                    <div id="card-errors" role="alert" class="text-danger mt-2"></div>
+                </div>
+
+                <!-- Visualizzazione del prezzo del corso -->
+                <p>Prezzo del corso: {{ course.price }}€</p>
+            
+                <!-- Pulsante per inviare il form -->
+                <button type="submit" class="btn btn-primary" id="submit-payment">Paga</button>
+            </form>
+        </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const stripe = Stripe('{{ stripe_public_key }}');
+        const elements = stripe.elements();
+        const cardElement = elements.create('card', {
+            style: {
+                base: {
+                    fontSize: '16px',
+                    color: '#32325d',
+                    '::placeholder': {
+                        color: '#aab7c4',
+                    },
+                },
+                invalid: {
+                    color: '#fa755a',
+                    iconColor: '#fa755a',
+                },
+            },
+        });
+
+        cardElement.mount('#card-element');
+
+        const form = document.getElementById('payment-form');
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const {error, paymentIntent} = await stripe.confirmCardPayment('{{ client_secret }}', {
+                payment_method: {
+                    card: cardElement,
+                    billing_details: {
+                        name: document.getElementById('cardholder-name').value,
+                        email: '{{ request.user.email }}'
+                    }
+                }
+            });
+
+            if (error) {
+                // Gestisci errori nel pagamento
+                document.getElementById('card-errors').textContent = error.message;
+            } else {
+                // Pagamento completato con successo
+                window.location.href = "{% url 'essential:save_course' course.pk %}";
+            }
+        });
+    });
+</script>
+{% endblock %}

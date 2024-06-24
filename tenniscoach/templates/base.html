@@ -13,6 +13,10 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"> 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script> 
 
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+
   {% load static%} 
   <link rel="shortcut icon" href="{% static '/images/favicon.ico' %}">
 
@@ -32,9 +36,29 @@
 
 <title>{% block title %}Tennis Coach {% endblock %}</title> 
 
+{% if user.is_authenticated and "ok" in request.GET.login %}
+  <div id="info" class="modal fade" tabindex="-1" role="dialog" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog border border-warning  border-2 rounded-2" role="document" >
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Benvenuto {{ user.username }}</h5>
+        </div>
+        <div class="modal-body">
+          <p>La procedura di login è andata a buon fine.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    $(document).ready(function(){
+        var myModal = new bootstrap.Modal(document.getElementById('info'));
+        myModal.show();
+    });
+  </script>
+{% endif %}
+
+
 <body class="body">
-
-
 
   <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
   {% block navbar %}
@@ -46,26 +70,31 @@
       <img src="{% static '/images/logo.png' %}" alt="Logo" width="80" height="60" class="me-2">
       TennisCoach
     </a>
-    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+    <div class="collapse navbar-collapse" >
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="{% url 'essential:home' %}">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'essential:listacorsi' %}">Corsi</a>
+          <a class="nav-link" href="{% url 'essential:listacorsi' %}">Cerca corsi</a>
         </li>
+        {% if "Coach" in user.groups.all.0.name %}
+          <li class="nav-item">
+          <a class="nav-link" href="">Gestisci corsi</a>
+        </li>
+        {% endif %}
       </ul>
       {% if user.is_authenticated %}
         <form id="logout-form" method="post" action="{% url 'logout' %}" >
           {% csrf_token %}
-          <button type="submit" class="btn btn-info">Logout</button>
+          <button type="submit" class="btn">Logout</button>
         </form>
         <div class="dropdown text-end">
           <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="{% static user.profile.picture %}" width="50" height="50" class="rounded-circle">
+            <img src="/media{{ user.profile.picture.url }}" width="50" height="50" class="rounded-circle">
           </a>
           <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end" aria-labelledby="dropdownUser1">
-            <li><a class="dropdown-item text-end" href="{% url 'essential:dashboard'%}">I tuoi corsi</a></li>
+            <li><a class="dropdown-item text-end" href="{% url 'users:dashboard'%}">Corsi acquistati</a></li>
             <li><a class="dropdown-item text-end" href="{% url 'users:profile' user.profile.pk %}">Modifica profilo</a></li>
           </ul>
         </div>
@@ -74,6 +103,7 @@
       <form class="d-flex" role="search">
         <a class="btn" href="{% url 'register' %}"><span>Sign Up</span></a>
         <a class="btn" href="{% url 'login' %}"><span>Log In</span></a>
+
          </form>
       {% endif %}
      
@@ -86,25 +116,19 @@
 {% block content %}
 {% endblock  %}
   
-{% comment %}   <div class="jumbotron text-center" style="margin-bottom:0">
-    {% block footer %} 
 
-      {% if user.is_authenticated %}
-      <form id="logout-form" method="post" action="{% url 'admin:logout' %}">
-        {% csrf_token %}
-        <button type="submit" class="btn btn-info">Logout</button>
-      </form>
-      {% else %}
-      <a class="btn btn-info" href="{% url 'register' %}" role="button">Registrati</a>
-      <a class="btn btn-info" href="{% url 'login' %}" role="button">Login</a>
-      {% endif %}
-
-      <a class="btn btn-warning" href="/admin/" role="button">Admin Login</a>
-    
-    {%  endblock %}
-  </div> {% endcomment %}
-  <div class="container">
+   <div class="container">
     <footer class="py-3 my-4">
+      <div class="row justify-content-center mb-3">
+        <div class="col-auto">
+          <a class="btn btn-admin" href="/admin/"><span>Admin</span></a>
+        </div>
+        {% if user.is_staff %}
+        <div class="col-auto">
+          <a class="btn btn-admin" href="{% url 'registerc' %}">Sign up Coach</a>
+        </div>
+        {% endif %}
+      </div>
       <ul class="nav justify-content-center border-bottom pb-3 mb-3">
         <p class="text-center custom-footer">Progetto di Tecnologie Web - 2024</p>
       </ul>

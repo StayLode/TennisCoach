@@ -22,14 +22,32 @@ class Profile(models.Model):
     surname = models.CharField(max_length=20, null=True)
     email = models.EmailField(null = True)
     picture = models.ImageField(
-        upload_to='users_pics',
-        default=os.path.join('static/images', 'unknown_user.jpg'),
+        upload_to='static/users_pics',
+        default='/static/images/unknown_user.jpg',
         blank=True
     )
-    description = models.CharField(max_length=1000, null=True)
-        
+    purchases = models.ManyToManyField(to = "essential.Course", through="essential.Purchase", blank=True, related_name="profile_purchases")
+
+
     def __str__(self):
         pass
 
     class Meta:
         verbose_name_plural = "Utenti"
+
+    
+    
+    def has_permession_auth(self, resource:str):
+        #L'import va fatto dentro in modo che sia lazy; così facendo quando richiamo has_permession_auth Lesson sarà definita
+        from essential.models import Lesson
+        lesson = Lesson.objects.filter(videos__icontains=resource)
+        if not lesson:
+          return False
+        
+        # Tra tutti i corsi che contengono la risorsa controllo se ce n'è almeno uno che è acquistato
+        if lesson.filter(course__pk__in=self.purchases.values('pk')):
+          return True
+        
+        if lesson.filter(course__user_id=self.id):
+          return True
+        return False

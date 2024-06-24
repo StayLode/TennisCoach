@@ -33,7 +33,7 @@
           {% if user.is_authenticated %}
             <h1>Benvenuto {{user.username}}!</h1>
             <p>Clicca per visualizzare i tuoi corsi!</p>
-            <p><a class="btn" href="{% url 'essential:listacorsi' %}"><span>I tuoi corsi</span></a></p>
+            <p><a class="btn" href="{% url 'users:dashboard'%}"><span>I tuoi corsi</span></a></p>
             {% else %}
             <h1>“Tu non sai cos'è il tennis, è una relazione.”</h1>
             <p class="opacity-75">ZENDAYA - Tashi Donaldson</p>

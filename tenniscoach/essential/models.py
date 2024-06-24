@@ -3,8 +3,7 @@ from django.contrib.auth.models import User
 import os
 from moviepy.editor import VideoFileClip
 from django.utils import timezone
-
-
+from users.models import Profile
 
 class Course(models.Model):
     """
@@ -15,15 +14,14 @@ class Course(models.Model):
     title = models.CharField(max_length=50)
     description = models.CharField(max_length=1000)
     picture = models.ImageField(
-        upload_to='courses_pics',
-        default=os.path.join('static/images', f'unknown_course1.jpg'),
+        upload_to='static/courses_pics/',
+        default='/static/images/unknown_course1.jpg',
         blank=True
     )
     category = models.CharField(max_length=20)
     price = models.DecimalField(max_digits=4, decimal_places=2)  
     date = models.DateTimeField(auto_now_add=True)      
-    def __str__(self):
-        pass
+    
     def isFree(self):
         return not(bool(self.price))
     
@@ -42,15 +40,13 @@ class Lesson(models.Model):
     """
     course = models.ForeignKey(Course,on_delete=models.CASCADE)
     title = models.CharField(max_length=50)
-    duration = models.DurationField(max_length=1000)
+    duration = models.DurationField()
     videos = models.FileField(
         upload_to='courses_videos/',
-        default=os.path.join('static/videos', 'unknown_video.mp4'),
+        default=os.path.join('videos', 'unknown_video.mp4'),
         blank=True
     ) 
-    def __str__(self):
-        pass
-
+    
     def save(self, *args, **kwargs):
         # Calcola la durata del video solo se è impostato il video
         if self.videos:
@@ -70,8 +66,8 @@ class Purchase(models.Model):
     """
     Entity that describe the relationship between user and course and models a purchase of a course.
     """
-    utente = models.ForeignKey(User, on_delete=models.PROTECT)
-    corso = models.ForeignKey(Course, on_delete=models.PROTECT)
+    utente = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    corso = models.ForeignKey(Course, on_delete=models.CASCADE)
     date = models.DateTimeField()
 
     def purchased_by(self):
@@ -80,3 +76,5 @@ class Purchase(models.Model):
     
     class Meta:
         verbose_name_plural = "Acquisti"
+
+

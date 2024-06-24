@@ -12,20 +12,20 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div id="message-alert" class="alert alert-custom alert-dismissible fade show" role="alert" style="display:none;">
-                    <a href="#" class="btn btn-warning btn-sm" onclick="closeAlert(event)" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </a>
-                    <span id="message-content"></span>
-                </div>
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <!-- Pulsanti sopra il titolo del corso -->
                     <div>
                         <button class= "btn" onclick='window.history.go(-1)'>Torna indietro</button>
-                        {% if user.is_authenticated and not saved_by_current_user %}
+                        {% if user.is_authenticated and not saved_by_current_user and not is_the_creator %}
                             <!-- Mostra pulsanti solo se il corso non è stato salvato -->
                             {% if object.price != 0 %}
-                                <a href="#" class="btn btn-primary" onclick="purchaseCourse(event)">Acquista</a>
+                                <form id="checkout-form" method="post" action="{% url 'custom_payment:checkout' object.pk %}">
+                                    {% csrf_token %}
+                                    <!-- Campo nascosto per l'id del corso -->
+                                    <input type="hidden" name="course_id" value="{{ object.pk }}">
+                                    <!-- Pulsante per inviare il form -->
+                                    <button type="submit" class="btn btn-primary">Acquista</button>
+                                </form>
                             {% else %}
                                 <a href="{% url 'essential:save_course' object.pk %}" class="btn btn-primary">Salva</a>
                             {% endif %}
@@ -48,7 +48,7 @@
                 <div class="card-body">
                     <h6 class="card-title">Lezioni:</h6>
                     {% for lesson in lessons %}
-                        {% if user.is_authenticated and saved_by_current_user %}
+                        {% if user.is_authenticated and  saved_by_current_user or is_the_creator  %}
                             <!-- Mostra il link al modal solo se il corso è stato salvato -->
                             <a href="" class="text-decoration-none text-dark" data-bs-toggle="modal" data-bs-target="#videoModal{{ lesson.pk }}">
                         {% endif %}
@@ -68,7 +68,7 @@
                                     </div>
                                     <div class="modal-body">
                                         <video controls controlsList="nodownload" class="w-100">
-                                            <source src="{% static lesson.videos %}" type="video/mp4">
+                                            <source src="/media/{{ lesson.videos }}" type="video/mp4">
                                             Il tuo browser non supporta la visualizzazione di video.
                                         </video>
                                     </div>
@@ -83,10 +83,10 @@
                     <!-- Testo dell'utente del coach -->
                     <div class="ml-3">
                         <a>Creato da:</a>
-                        <a class="coach-profile" href="{{ object.user.get_absolute_url }}"> {{ coach.user }}</a>
+                        <a class="coach-profile" href="{% url 'users:view_profile' coach.pk %}"> {{ coach.user }}</a>
                     </div>
                     <!-- Immagine profilo -->
-                    <img src="{% static coach.picture %}" alt="Immagine profilo" class="rounded-circle mr-3" style="width: 50px; height: 50px;">
+                    <img src="/media{{ coach.picture.url }}" alt="Immagine profilo" class="rounded-circle mr-3" style="width: 50px; height: 50px;">
                 </div>
             </div>
         </div>
@@ -95,40 +95,7 @@
 <br>
 
 <script>
-    function saveCourse(event, courseId) {
-        event.preventDefault();
-        fetch(`/save_course/${courseId}/`, {
-            method: "GET",
-            headers: {
-                "X-Requested-With": "XMLHttpRequest"
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            const alertBox = document.getElementById('message-alert');
-            const alertContent = document.getElementById('message-content');
-            alertContent.innerHTML = data.message;
-            alertBox.style.display = 'block';
-        })
-        .catch(error => console.error('Error:', error));
-    }
-    function closeAlert() {
-        const alertBox = document.getElementById('message-alert');
-        alertBox.style.display = 'none';
-    }
-    
-    // Function to stop video when modal is closed
-    document.addEventListener('DOMContentLoaded', function() {
-        var modals = document.querySelectorAll('.modal');
-        modals.forEach(function(modal) {
-            modal.addEventListener('hidden.bs.modal', function(event) {
-                var video = modal.querySelector('video');
-                if (video) {
-                    video.pause();
-                    video.currentTime = 0;
-                }
-            });
-        });
-    });
+  
+  
 </script>
 {% endblock %}

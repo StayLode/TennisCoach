@@ -51,6 +51,16 @@
     right: 0;
   }
 
+  .btn-admin{
+    background-color: #e08414f8;
+    width: 120px;
+  }
+  .btn-admin:hover{
+    background-color: #eda855f8;
+    
+    color: #343a40;
+  }
+  
 .navbar-dark .navbar-brand {
   color: #eab621;
   font-weight: bold;
@@ -170,3 +180,4 @@
   background-color: #a2a6aa;
   border: 2px solid #eab621;
 }
+

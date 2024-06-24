@@ -10,11 +10,10 @@ class OptionalFieldsMixin:
 class UserProfileForm(OptionalFieldsMixin, forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['name', 'surname', 'description', 'email', 'picture']
+        fields = ['name', 'surname', 'email', 'picture']
         labels = {
             'name': 'Nome',
             'surname': 'Cognome',
-            'description': 'Descrizione personale',
             'email': 'Indirizzo email',
             'picture': 'Immagine del profilo',
         }

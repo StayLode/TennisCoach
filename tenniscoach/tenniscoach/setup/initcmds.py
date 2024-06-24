@@ -1,6 +1,8 @@
 from essential.models import Course, Lesson, Purchase
 from users.models import Profile
 from django.contrib.auth.models import User
+from django.contrib.auth.models import Group
+
 from datetime import timedelta
 import json, os, random
 from django.db import connection
@@ -38,34 +40,43 @@ def init_db():
 	with open(FILEPATH, encoding='utf-8') as f:
 		courses_data = json.load(f)
 
+	#Creazione superuser
 	admin = User.objects.create_superuser(username="admin", password="123")
 	admin.save()
 
-	user = User.objects.create_user(username="lode", password="123")
-	user.save()
+	#Creazione customers
+	utenti_customer = ["matteo", "lode", "nicholas", "andrea"]
+	for name in utenti_customer:
+		customer = User.objects.create_user(username=name, password="123")
+		g = Group.objects.get(name="Customer") 
+		g.user_set.add(customer) 
+		customer.save()
 
-	coaches=['mezzanotte', 'prampolini', 'ugolini', 'menabue']
+	#Creazione coaches
+	utenti_coach = ['mezzanotte', 'prampolini', 'ugolini', 'menabue']
+
+	for name in utenti_coach:
+		coach = User.objects.create_user(username=name, password="123")
+		g = Group.objects.get(name="Coach") 
+		g.user_set.add(coach) 
+		coach.save()
+
+	#Creazione corsi
 	categories = ["Principiante", "Intermedio", "Esperto"]
-
-	for name in coaches:
-		user = User.objects.create_user(username=name, password="123")
-		user.save()
-
-	users =  list(User.objects.all())
-
+	coaches =  list(User.objects.filter(username__in=utenti_coach))
 	for course in courses_data:
-		coach_id = random.randint(1,4)
+		coach_id = random.randint(0,3)
 		category_val = random.randint(0,2)
 		picture_id = random.randint(1,5)
 		c = Course()
 		c.title = course["titolo"]
 		c.description = course["descrizione"]
-		c.user = users[coach_id]
+		c.user = coaches[coach_id]
 		c.category = categories[category_val]
 		c.price = course["prezzo"]
-		c.picture = os.path.join('static/images', f'unknown_course{picture_id}.jpg')
+		c.picture = os.path.join('images', f'unknown_course{picture_id}.jpg')
 		c.save()
-
+		#Aggiunta lezioni
 		for lesson in course["lezioni"]:
 			l = Lesson()
 			l.title = lesson["titolo"]
@@ -78,5 +89,3 @@ def init_db():
 
     
 	print("DUMP DB")
-	#print(Libro.objects.all()) #controlliamo
-	#print(Copia.objects.all())

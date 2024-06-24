@@ -1,13 +1,15 @@
 from typing import Any
-from django.db.models.query import QuerySet
 from django.views.generic.list import ListView
-from django.http import JsonResponse
 from django.contrib import messages
 from django.views.generic.detail import DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
+from django.contrib.auth.decorators import user_passes_test
+from django.http import HttpResponseNotFound
+from django.template.loader import render_to_string
+
 
 
 from django.db.models import Q
@@ -96,36 +98,30 @@ class CorsoDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["lessons"]= Lesson.objects.filter(course__pk=context["object"].pk)
+        context["lessons"] = Lesson.objects.filter(course__pk=context["object"].pk)
         for coach in Profile.objects.all():
-            if coach.pk==context["object"].user.profile.pk:
-                context["coach"]=coach
+            if coach.pk == context["object"].user.profile.pk:
+                context["coach"] = coach
 
         user = self.request.user
 
         purchased=Purchase.objects.filter(corso_id=context["object"].pk)
-        context["saved_by_current_user"]= purchased.filter(utente_id=user.id).exists()
+        context["saved_by_current_user"] = purchased.filter(utente_id=user.id).exists()
+        if self.object.user_id == user.id:
+            context["is_the_creator"] = True
+        else:
+            context["is_the_creator"] = False
         return context
-
-
-class YourCoursesListView(LoginRequiredMixin, ListView):
-    model = Purchase
-    template_name = "dashboard.html"
-    
-    paginate_by = 9
-
-    def get_queryset(self):
-        queryset =  super().get_queryset()
-        queryset = queryset.filter(utente_id = self.request.user.id)
-        return queryset.order_by("-date")
-
 
 @login_required
 def save_course(request, course_id):
     course = get_object_or_404(Course, id=course_id)
     user = request.user
+    if (user.id == course.user_id):
+        html = render_to_string('404.html', {})
+        return HttpResponseNotFound(html)
     # Verifica se l'utente ha già salvato questo corso
-    purchase, created = Purchase.objects.get_or_create(utente=user, corso=course, defaults={'date': timezone.now()})
+    purchase, created = Purchase.objects.get_or_create(utente=user.profile, corso=course, defaults={'date': timezone.now()})
 
     if created:
         message = "Corso salvato con successo!"
@@ -133,4 +129,8 @@ def save_course(request, course_id):
         message = "Hai già salvato questo corso."
     
     messages.success(request, message)
-    return redirect("essential:dashboard")
+    return redirect("users:dashboard")
+
+
+
+#Views solo per i coach

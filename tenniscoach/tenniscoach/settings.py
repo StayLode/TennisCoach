@@ -41,7 +41,9 @@ INSTALLED_APPS = [
     'crispy_forms',
     'crispy_bootstrap5',
     "essential",
-    "users"
+    "users",
+    'payments',
+    'custom_payment'
 ]
 
 MIDDLEWARE = [
@@ -121,10 +123,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
+
 
 STATIC_URL = 'media/static/'
-STATICFILES_DIRS = [os.path.join(MEDIA_ROOT, 'static/'), MEDIA_ROOT]
+STATICFILES_DIRS = [os.path.join(MEDIA_ROOT, 'static/')]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
@@ -136,3 +138,19 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 LOGIN_REDIRECT_URL = "/?login=ok" #redireziona alla home, ma con un parametro GET
 LOGIN_URL = "/login/?auth=notok" #redireziona al login, ma con un parametro GET
+
+PAYMENT_VARIANTS = {
+    'stripe': ('payments.stripe.StripeProvider', {
+        'secret_key': 'sk_test_51PUn1dRvj7DKfmazvogNOjjd9w5GrB1WTmZfsuSWVOfHUfY4MPOZvXIXpgxZW2lAB3xP3zda6uC0bNo6v92BoV8300k7YPBrBU',
+        'public_key': 'pk_test_51PUn1dRvj7DKfmazYUL00PT9Q9FPPpExtVaZq1Noz4O3Couuy2aKZvnTFqpExZX7G7h4aiKvyr5FZ2Uu58mgxDdQ009MLCo3rX',
+    }),
+}
+
+# Configurazione per usare carte di prova
+STRIPE_TEST_PUBLIC_KEY = 'pk_test_51PUn1dRvj7DKfmazYUL00PT9Q9FPPpExtVaZq1Noz4O3Couuy2aKZvnTFqpExZX7G7h4aiKvyr5FZ2Uu58mgxDdQ009MLCo3rX'
+STRIPE_TEST_SECRET_KEY = 'sk_test_51PUn1dRvj7DKfmazvogNOjjd9w5GrB1WTmZfsuSWVOfHUfY4MPOZvXIXpgxZW2lAB3xP3zda6uC0bNo6v92BoV8300k7YPBrBU'
+
+PAYMENT_HOST = 'localhost'  # Sostituisci con il tuo dominio in produzione
+PAYMENT_USES_SSL = False  # Imposta su True in produzione con HTTPS
+SITE_ID = 1  # Assicurati che il SITE_ID sia impostato
+PAYMENT_MODEL = 'custom_payment.Payment'  # Usa il modello di pagamento predefinito di django-payments
