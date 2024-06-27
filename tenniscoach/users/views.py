@@ -69,7 +69,7 @@ class YourCoursesListView(LoginRequiredMixin, ListView):
     model = Profile
     template_name = "dashboard.html"
     
-    paginate_by = 9
+    paginate_by = 6
 
     def get_queryset(self):
         queryset =  self.request.user.profile.purchases.all()

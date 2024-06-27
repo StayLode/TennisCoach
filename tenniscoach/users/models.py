@@ -31,7 +31,8 @@ class Profile(models.Model):
 
 
     def __str__(self):
-        pass
+        print(self.user)
+        return self.user
 
     class Meta:
         verbose_name_plural = "Utenti"
@@ -41,7 +42,7 @@ class Profile(models.Model):
     def has_permession_auth(self, resource:str):
         #L'import va fatto dentro in modo che sia lazy; così facendo quando richiamo has_permession_auth Lesson sarà definita
         from essential.models import Lesson
-        lesson = Lesson.objects.filter(videos__icontains=resource)
+        lesson = Lesson.objects.filter(video__icontains=resource)
         if not lesson:
           return False
         

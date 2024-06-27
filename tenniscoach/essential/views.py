@@ -104,13 +104,13 @@ class CorsoDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context["lessons"] = Lesson.objects.filter(course__pk=context["object"].pk)
         for coach in Profile.objects.all():
-            if coach.pk == context["object"].user.profile.pk:
+            if coach.pk == context["object"].user.pk:
                 context["coach"] = coach
 
         user = self.request.user
 
-        purchased=Purchase.objects.filter(corso_id=context["object"].pk)
-        context["saved_by_current_user"] = purchased.filter(utente_id=user.id).exists()
+        purchased=Purchase.objects.filter(course_id=context["object"].pk)
+        context["saved_by_current_user"] = purchased.filter(user_id=user.id).exists()
         if self.object.user_id == user.id:
             context["is_the_creator"] = True
         else:
@@ -119,14 +119,14 @@ class CorsoDetailView(DetailView):
 
 @login_required
 def save_course(request, course_id):
-    course = get_object_or_404(Course, id=course_id)
-    user = request.user
-    if (user.id == course.user_id):
+    corso = get_object_or_404(Course, id=course_id)
+    utente = request.user
+    if (utente.id == corso.user_id):
         message = "Il corso è di tua proprietà!"
         messages.warning(request, message)
         return redirect("essential:createdcourses")
     # Verifica se l'utente ha già salvato questo corso
-    purchase, created = Purchase.objects.get_or_create(utente=user.profile, corso=course, defaults={'date': timezone.now()})
+    _, created = Purchase.objects.get_or_create(user=utente.profile, course=corso, defaults={'date': timezone.now()})
 
     if created:
         message = "Corso salvato con successo!"
@@ -203,7 +203,7 @@ class CreateCourseView(GroupRequiredMixin, CreateView):
         return context
     
     def form_valid(self, form):
-        form.instance.user = self.request.user  # Associa l'utente corrente come creatore del corso
+        form.instance.user = self.request.user.profile  # Associa l'utente corrente come creatore del corso
         messages.success(self.request, self.success_message)
         return super().form_valid(form)
 

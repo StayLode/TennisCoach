@@ -6,7 +6,7 @@ from django.contrib.auth.models import Group
 from datetime import timedelta
 import json, os, random
 from django.db import connection
-
+from custom_payment.models import Payment
 from pathlib import Path
 
 FILENAME: str = "corsi.json"
@@ -20,18 +20,17 @@ def reset_ids(tables):
 		with connection.cursor() as cursor:
 			cursor.execute(f"DELETE FROM sqlite_sequence WHERE name = '{t}';")
 
-
 def erase_db():
 	print("Cancello il DB")
 	Purchase.objects.all().delete()
-
+	Payment.objects.all().delete()
 	Course.objects.all().delete()
 	Profile.objects.all().delete()
 	Lesson.objects.all().delete()
 	User.objects.all().delete()
 
 def init_db():
-	tables=["auth_user","essential_course","essential_lesson","users_profile","essential_purchase"]
+	tables=["auth_user","essential_course","essential_lesson","users_profile","essential_purchase", "custom_payment_payment"]
 	reset_ids(tables)
 
 	if Course.objects.count()!= 0:
@@ -63,7 +62,7 @@ def init_db():
 
 	#Creazione corsi
 	categories = ["Principiante", "Intermedio", "Esperto"]
-	coaches =  list(User.objects.filter(username__in=utenti_coach))
+	coaches =  list(Profile.objects.filter(user__username__in=utenti_coach))
 	for course in courses_data:
 		coach_id = random.randint(0,3)
 		category_val = random.randint(0,2)
@@ -82,7 +81,31 @@ def init_db():
 			l.title = lesson["titolo"]
 			l.course = c
 			l.save()
-                
+             
+	#Creazione acquisti
+	free_courses = Course.objects.filter(price=0)
+	courses = list(free_courses)
+	n_courses = free_courses.count()
+	
 
+	# Ottieni il gruppo "Customer"
+	customer_group = Group.objects.get(name="Customer")
+	# Ottieni gli utenti che appartengono al gruppo "Customer"
+	customer_users = User.objects.filter(groups=customer_group)
+	# Ottieni i profili associati a questi utenti
+	customer_profiles = Profile.objects.filter(user__in=customer_users) 
+	users = list(customer_profiles)
+	n_users = customer_profiles.count()
+	print(n_users)
+
+	for j in range(n_users):
+		for _ in range(8):
+			p = Purchase()
+			p.course = courses[random.randint(0, n_courses-1)]
+			p.user = users[j]
+			try:
+				p.save()
+			except Exception as e:
+				pass
     
 	print("DUMP DB")

@@ -17,21 +17,21 @@ def validate_video(value):
 
 class CreateLessonForm(forms.ModelForm):
     
-    videos = forms.FileField(
+    video = forms.FileField(
         widget=forms.FileInput(attrs={'class': 'form-control'}),
         validators=[validate_video]
     )
     
     class Meta:
         model = Lesson
-        fields = ['title', 'videos']
+        fields = ['title', 'video']
         labels = {
             'title': 'Titolo',
-            'videos': 'Video'
+            'video': 'Video'
         }
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
-            'videos': forms.FileInput(attrs={'class': 'form-control'}),
+            'video': forms.FileInput(attrs={'class': 'form-control'}),
         }
 
 class CreateCorsoForm(forms.ModelForm):

@@ -15,7 +15,7 @@ stripe.api_key = settings.STRIPE_TEST_SECRET_KEY
 @login_required
 def checkout(request, course_id):
     course = get_object_or_404(Course, id=course_id)
-    purchased = Purchase.objects.filter(utente_id=request.user.id, corso_id=course.id).exists()
+    purchased = Purchase.objects.filter(user_id=request.user.id, course_id=course.id).exists()
     user = request.user
 
     if (user.id == course.user_id):
@@ -34,13 +34,13 @@ def checkout(request, course_id):
         if form.is_valid():
             payment = Payment.objects.create(
                 variant='stripe',
-                description=f'Acquisto del corso {course.title}',
+                description=course_id,
                 total=course.price,
                 currency='EUR',
                 delivery=0,
                 tax=0,
                 status='waiting',
-                billing_first_name=request.user.first_name,
+                billing_first_name=request.user.username,
                 billing_last_name=request.user.last_name,
                 billing_email=request.user.email,
                 customer_ip_address=request.META.get('REMOTE_ADDR', '')

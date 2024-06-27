@@ -5,13 +5,15 @@ from moviepy.editor import VideoFileClip
 from django.utils import timezone
 from users.models import Profile
 from django.core.validators import MinValueValidator
+from django.db.models import UniqueConstraint
+
 
 class Course(models.Model):
     """
     Entity that models a course, composed by lessons.
     """
     
-    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    user = models.ForeignKey(Profile,on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     description = models.CharField(max_length=1000)
     picture = models.ImageField(
@@ -42,7 +44,7 @@ class Lesson(models.Model):
     course = models.ForeignKey(Course,on_delete=models.CASCADE)
     title = models.CharField(max_length=50)
     duration = models.DurationField(blank=True, null=True)
-    videos = models.FileField(
+    video = models.FileField(
         upload_to='courses_videos/',
         default=os.path.join('videos', 'unknown_video.mp4'),
         blank=True
@@ -52,9 +54,9 @@ class Lesson(models.Model):
         # Calcola la durata del video solo se è impostato il video
         super().save(*args, **kwargs)
 
-        if self.videos:
+        if self.video:
             try:
-                video_path = self.videos.path
+                video_path = self.video.path
                 clip = VideoFileClip(video_path)
                 self.duration = timezone.timedelta(seconds=clip.duration)
             except OSError as e:
@@ -69,15 +71,15 @@ class Purchase(models.Model):
     """
     Entity that describe the relationship between user and course and models a purchase of a course.
     """
-    utente = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    corso = models.ForeignKey(Course, on_delete=models.CASCADE)
-    date = models.DateTimeField()
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    date = models.DateTimeField(auto_now_add=True)
 
-    def purchased_by(self):
-        if self.utente == None: return None
-        return self.utente.username
     
     class Meta:
-        verbose_name_plural = "Acquisti"
+        constraints = [
+            UniqueConstraint(fields=['user', 'course'], name='unique_user_course')
+        ]
+
 
 
