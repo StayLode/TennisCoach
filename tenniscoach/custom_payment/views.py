@@ -1,10 +1,12 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+
 from .forms import CheckoutForm
 from essential.models import *
 import stripe
 from django.conf import settings
-from payments import get_payment_model
+from payments import get_payment_model 
 
 # Create your views here.
 
@@ -12,7 +14,19 @@ stripe.api_key = settings.STRIPE_TEST_SECRET_KEY
 
 @login_required
 def checkout(request, course_id):
-    course = get_object_or_404(Course, pk=course_id)
+    course = get_object_or_404(Course, id=course_id)
+    purchased = Purchase.objects.filter(utente_id=request.user.id, corso_id=course.id).exists()
+    user = request.user
+
+    if (user.id == course.user_id):
+        message = "Il corso è di tua proprietà!"
+        messages.warning(request, message)
+        return redirect("essential:createdcourses")
+    elif purchased:
+        message = "Hai già acquistato questo corso!"
+        messages.warning(request, message)
+        return redirect("users:dashboard")
+    
     Payment = get_payment_model()
 
     if request.method == 'POST':

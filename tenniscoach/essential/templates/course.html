@@ -1,0 +1,153 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load custom_filter %}
+{% block title %} Dettagli di {{ object.title }} {% endblock %}
+
+{% block content %}
+<div id="toast-container">
+         {% if messages %}
+         {% for message in messages %}
+         <div class="toast align-items-center text-bg-{{ message.tags|default:'info' }} border-0" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+               <div class="toast-body">
+                  {{ message }}
+               </div>
+               <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+         </div>
+         {% endfor %}
+         {% endif %}
+    </div>
+<br>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <!-- Pulsanti sopra il titolo del corso -->
+                    <div>
+                        {% if is_the_creator %}
+                            <a href="{% url 'essential:createdcourses'%}" class="btn"> Torna indietro </a>
+                        {% else %}
+                            <a href="{% url 'essential:listacorsi'%}" class="btn"> Torna indietro </a>
+                        {% endif %}
+                        {% if user.is_superuser or is_the_creator %}
+                        <div class="btn-group ml-2" role="group" aria-label="Pulsanti modifica e cancellazione">
+                            <a href="{% url 'essential:editcorso' object.pk %}" class="btn btn-admin btn-creator">
+                                <img src="{% static 'images/edit.png' %}" alt="Modifica" style="height: 20px; width: 20px;">
+                            </a>
+                            <a href="{% url 'essential:deletecorso' object.pk %}" class="btn btn-admin btn-creator">
+                                <img src="{% static 'images/delete.png' %}" alt="Elimina" style="height: 20px; width: 20px;">
+                            </a>
+                        </div>
+                        {%endif%}
+                        {% if user.is_authenticated and not saved_by_current_user and not is_the_creator %}
+                            <!-- Mostra pulsanti solo se il corso non è stato salvato -->
+                            {% if object.price != 0 %}
+                                <form id="checkout-form" method="post" action="{% url 'custom_payment:checkout' object.pk %}">
+                                    {% csrf_token %}
+                                    <!-- Campo nascosto per l'id del corso -->
+                                    <input type="hidden" name="course_id" value="{{ object.pk }}">
+                                    <!-- Pulsante per inviare il form -->
+                                    <button type="submit" class="btn btn-primary">Acquista</button>
+                                </form>
+                            {% else %}
+                                <a href="{% url 'essential:save_course' object.pk %}" class="btn btn-primary">Salva</a>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                    <h5 class="mb-0">{{ object.title }}</h5>
+                    <!-- Immagine del corso -->
+                    <img src="/media{{ object.picture.url }}" alt="Immagine del corso" class="img-fluid rounded" style="max-width: 150px;">
+                </div>
+                <div class="card-body">
+                    <!-- Dettagli del corso -->
+                    <ul class="list-group list-group-flush body-lesson">
+                        <li class="list-group-item"><strong>Descrizione:</strong> {{ object.description }}</li>
+                        <li class="list-group-item"><strong>Livello:</strong> {{ object.category }}</li>
+                        <li class="list-group-item"><strong>Prezzo:</strong> {% if object.isFree %}Gratis{% else %}{{ object.price }}€{% endif %}</li>
+                        <!-- Aggiungi altri campi del corso qui -->
+                    </ul>
+                </div>
+                <!-- Lezioni come card -->
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <h6 class="card-title mb-0">Lezioni:</h6>
+                        {% if user.is_superuser or is_the_creator %}
+                        <a href="{% url 'essential:createlesson' object.pk %}" class="btn btn-admin btn-creator btn-rounded ml-2">
+                            <img src="{% static 'images/add.png' %}" alt="Aggiungi" style="height: 20px; width: 20px;">
+                        </a>
+                        {% endif %}
+                    </div>
+                    {% for lesson in lessons %}
+                        {% if user.is_authenticated and saved_by_current_user or is_the_creator %}
+                        <!-- Mostra il link al modal solo se il corso è stato salvato -->
+                        <a href="" class="text-decoration-none text-dark" data-bs-toggle="modal" data-bs-target="#videoModal{{ lesson.pk }}">
+                        {% endif %}
+                        <div class="card mb-2">
+                            <div class="card-body d-flex justify-content-between align-items-center video-body">
+                                <div class="d-flex flex-column">
+                                    <span>{{ lesson.title }}</span>
+                                    <span>{{ lesson.duration|format_timedelta }}</span>
+                                </div>
+                                <div >
+                                    {% if user.is_superuser or is_the_creator %}
+                                    <a href="{% url 'essential:editlesson' lesson.pk %}" class="btn btn-admin btn-creator btn-rounded">
+                                        <img src="{% static 'images/edit.png' %}" alt="Modifica" style="height: 20px; width: 20px;">
+                                    </a>
+                                    <a href="{% url 'essential:deletelesson' lesson.pk %}" class="btn btn-admin btn-creator btn-rounded">
+                                        <img src="{% static 'images/delete.png' %}" alt="Elimina" style="height: 20px; width: 20px;">
+                                    </a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        {% if user.is_authenticated and saved_by_current_user or is_the_creator %}
+                        </a>
+                        {% endif %}
+                        <!-- Modal per il video della lezione -->
+                        <div class="modal fade" id="videoModal{{ lesson.pk }}" tabindex="-1" aria-labelledby="videoModalLabel{{ lesson.pk }}" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="videoModalLabel{{ lesson.pk }}">{{ lesson.title }}</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <video controls controlsList="nodownload" class="w-100">
+                                            <source src="/media/{{ lesson.videos }}" type="video/mp4">
+                                            Il tuo browser non supporta la visualizzazione di video.
+                                        </video>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Fine Modal -->
+                    {% endfor %}
+                </div>
+                <div class="card-footer d-flex justify-content-center align-items-center">
+                    <!-- Testo dell'utente del coach -->
+                    <div class="ml-3">
+                        <a>Creato da:</a>
+                        <a class="coach-profile" href="{% url 'users:view_profile' coach.pk %}"> {{ coach.user }}</a>
+                    </div>
+                    <!-- Immagine profilo -->
+                    <img src="/media{{ coach.picture.url }}" alt="Immagine profilo" class="rounded-circle mr-3" style="width: 50px; height: 50px;">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+
+
+<script>
+     document.addEventListener('DOMContentLoaded', function() {
+         var toastElList = [].slice.call(document.querySelectorAll('.toast'));
+         var toastList = toastElList.map(function(toastEl) {
+             return new bootstrap.Toast(toastEl, { autohide: true, delay: 4000 });
+         });
+         toastList.forEach(toast => toast.show());
+     });
+</script>
+{% endblock %}

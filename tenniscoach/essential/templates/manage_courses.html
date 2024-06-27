@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% block title %} I tuoi corsi {% endblock %}
+
+{% block content %}
+
+<div class="album py-5 ">
+    <div id="toast-container">
+         {% if messages %}
+         {% for message in messages %}
+         <div class="toast align-items-center text-bg-{{ message.tags|default:'info' }} border-0" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+               <div class="toast-body">
+                  {{ message }}
+               </div>
+               <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+         </div>
+         {% endfor %}
+         {% endif %}
+    </div>
+    <div class="container">
+        <h2 class="n_text"><strong> I tuoi corsi... </strong></h2>
+        <br>
+        <div class="d-flex align-items-center mb-4">
+            <p class="mr-2 n_text" style="margin: 5px;">Ordina per:</p>
+            <form method="get" class="form-inline d-flex align-items-center flex-nowrap">
+                <select name="order_by" class="form-control mr-2" style="margin: 5px;">
+                    <option value="">Seleziona...</option>
+                    <option value="title">Nome (A-Z)</option>
+                    <option value="-title">Nome (Z-A)</option>
+                    <option value="price">Prezzo (crescente)</option>
+                    <option value="-price">Prezzo (decrescente)</option>
+                    <option value="date">Data di creazione (crescente)</option>
+                    <option value="-date">Data di creazione (decrescente)</option>
+                </select>
+                <button type="submit" class="btn btn-search btn-primary" style="margin: 5px;">Ordina</button>
+            </form>
+        </div>
+
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            {% if object_list %}
+            {% for c in object_list %}
+            <div class="col">
+                {% include "course_card.html" %}
+            </div>
+            {% endfor %}
+            {% else %}
+            <p class = "n_text"> Nessun corso acquistato </p>
+            {%endif%}
+        </div>
+        
+        <br>
+        <div class="n_text"> {{ page_obj.paginator.count }} risultati trovati | Pagina {{page_obj.number}} </div>
+        <ul class="pagination mt-2 mb-0 justify-content-center n_text">
+            <li class="page-item">
+                {% if page_obj.has_previous %}
+                    <a class='btn' href="?{% if request.GET.query %}query={{ request.GET.query }}{% endif %}{% if request.GET.coach %}&coach={{ request.GET.coach }}{% endif %}{% if request.GET.paid %}&paid={{ request.GET.paid }}{% endif %}{% if request.GET.free %}&free={{ request.GET.free }}{% endif %}{% if request.GET.level %}&level={{ request.GET.level }}{% endif %}{% if request.GET.ordering %}&ordering={{ request.GET.ordering }}{% endif %}{% if request.GET.order_by %}&order_by={{ request.GET.order_by }}{% endif %}&page={{ page_obj.previous_page_number }}"><</a>
+                {% endif %}
+            </li>
+            <li class="page-item">
+                {% if page_obj.has_next %}
+                    <a class='btn' href="?{% if request.GET.query %}query={{ request.GET.query }}{% endif %}{% if request.GET.coach %}&coach={{ request.GET.coach }}{% endif %}{% if request.GET.paid %}&paid={{ request.GET.paid }}{% endif %}{% if request.GET.free %}&free={{ request.GET.free }}{% endif %}{% if request.GET.level %}&level={{ request.GET.level }}{% endif %}{% if request.GET.ordering %}&ordering={{ request.GET.ordering }}{% endif %}{% if request.GET.order_by %}&order_by={{ request.GET.order_by }}{% endif %}&page={{ page_obj.next_page_number }}">></a>
+                {% endif %}
+            </li>
+        </ul>
+    </div>
+</div>
+<script>
+     document.addEventListener('DOMContentLoaded', function() {
+         var toastElList = [].slice.call(document.querySelectorAll('.toast'));
+         var toastList = toastElList.map(function(toastEl) {
+             return new bootstrap.Toast(toastEl, { autohide: true, delay: 4000 });
+         });
+         toastList.forEach(toast => toast.show());
+     });
+</script>
+{% endblock %}

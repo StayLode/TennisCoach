@@ -21,7 +21,6 @@ from .setup.initcmds import *
 from django.contrib.auth import views as auth_views
 from . import settings
 
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     
@@ -35,6 +34,7 @@ urlpatterns = [
     path("registerc/", CoachCreateView.as_view(), name="registerc"),
     path("login/", auth_views.LoginView.as_view(), name="login"),
     path("logout/", auth_views.LogoutView.as_view(), name="logout"),
+    path("not_authorized/", custom_403_view, name="403"),
     re_path(r'.*/', custom_404_view, name='404'),
 ]
 #erase_db()

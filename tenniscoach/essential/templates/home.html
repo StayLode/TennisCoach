@@ -7,24 +7,23 @@
 
 
 {% block content %} 
- <!--{% if user.is_authenticated %}
-     
-        <div class="col-md-8">
-            <div class="card shadow-sm card-custom">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <h5 class="mb-0">Benvenuto {{ user.username }}</h5>
-                        <a href="{% url 'essential:listacorsi' %}" class="btn btn-sm btn-outline-secondary">Vedi profilo</a>
-                    </div>
-                </div>
+    <div id="toast-container">
+         {% if messages %}
+         {% for message in messages %}
+         <div class="toast align-items-center text-bg-{{ message.tags|default:'info' }} border-0" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+               <div class="toast-body">
+                  {{ message }}
+               </div>
+               <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
             </div>
-        </div>
-  
-{% endif %} -->
-
+         </div>
+         {% endfor %}
+         {% endif %}
+    </div>
 
 {% block carousel %}
-<div id="myCarousel" class="carousel slide mb-6" data-bs-ride="carousel" data-bs-interval="4000" style="width:100%;">
+<div id="myCarousel" class="carousel slide mb-6 border-warning" data-bs-ride="carousel" data-bs-interval="4000" style="width:100%;">
     <div class="carousel-inner rounded-1 shadow-4-strong">
       <div id="carousel" class="carousel-item active" >
         <img src="{% static '/images/background1.jpg' %}" class="d-block w-100" />
@@ -88,5 +87,14 @@
     </button>
   </div>
 
-{% endblock %}  
+{% endblock %} 
+<script>
+     document.addEventListener('DOMContentLoaded', function() {
+         var toastElList = [].slice.call(document.querySelectorAll('.toast'));
+         var toastList = toastElList.map(function(toastEl) {
+             return new bootstrap.Toast(toastEl, { autohide: true, delay: 4000 });
+         });
+         toastList.forEach(toast => toast.show());
+     });
+</script> 
 {% endblock %}

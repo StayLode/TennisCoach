@@ -74,15 +74,12 @@ def init_db():
 		c.user = coaches[coach_id]
 		c.category = categories[category_val]
 		c.price = course["prezzo"]
-		c.picture = os.path.join('images', f'unknown_course{picture_id}.jpg')
+		c.picture = f'/static/images/unknown_course{picture_id}.jpg'
 		c.save()
 		#Aggiunta lezioni
 		for lesson in course["lezioni"]:
 			l = Lesson()
 			l.title = lesson["titolo"]
-			min, sec = map(int,  lesson["durata"].split(':'))
-			duration = timedelta(minutes=min, seconds=sec)
-			l.duration = duration
 			l.course = c
 			l.save()
                 

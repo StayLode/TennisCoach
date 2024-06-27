@@ -32,6 +32,7 @@
                 <p>Prezzo del corso: {{ course.price }}€</p>
             
                 <!-- Pulsante per inviare il form -->
+                <a href="{% url 'essential:corso' course.pk %}" class="btn">Indietro</a>
                 <button type="submit" class="btn btn-primary" id="submit-payment">Paga</button>
             </form>
         </div>

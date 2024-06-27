@@ -58,9 +58,9 @@
 {% endif %}
 
 
-<body class="body">
+<body class="body body-tennis">
 
-  <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+  <nav class="navbar navbar-expand-lg  navbar-dark " style="background-color: #000000;">
   {% block navbar %}
     <div class="container-fluid">
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
@@ -78,10 +78,9 @@
         <li class="nav-item">
           <a class="nav-link" href="{% url 'essential:listacorsi' %}">Cerca corsi</a>
         </li>
-        {% if "Coach" in user.groups.all.0.name %}
-          <li class="nav-item">
-          <a class="nav-link" href="">Gestisci corsi</a>
-        </li>
+        {% if "Coach" in user.groups.all.0.name or user.is_staff%}
+          <li class="nav-item"><a class="nav-link" href="{% url 'essential:createcorso' %}">Aggiungi corso</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'essential:createdcourses' %}">Gestisci corsi</a></li>
         {% endif %}
       </ul>
       {% if user.is_authenticated %}

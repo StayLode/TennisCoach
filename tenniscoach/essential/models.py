@@ -4,6 +4,7 @@ import os
 from moviepy.editor import VideoFileClip
 from django.utils import timezone
 from users.models import Profile
+from django.core.validators import MinValueValidator
 
 class Course(models.Model):
     """
@@ -11,7 +12,7 @@ class Course(models.Model):
     """
     
     user = models.ForeignKey(User,on_delete=models.CASCADE)
-    title = models.CharField(max_length=50)
+    title = models.CharField(max_length=100)
     description = models.CharField(max_length=1000)
     picture = models.ImageField(
         upload_to='static/courses_pics/',
@@ -19,7 +20,7 @@ class Course(models.Model):
         blank=True
     )
     category = models.CharField(max_length=20)
-    price = models.DecimalField(max_digits=4, decimal_places=2)  
+    price = models.DecimalField(max_digits=4, decimal_places=2, validators=[MinValueValidator(0)])  
     date = models.DateTimeField(auto_now_add=True)      
     
     def isFree(self):
@@ -40,7 +41,7 @@ class Lesson(models.Model):
     """
     course = models.ForeignKey(Course,on_delete=models.CASCADE)
     title = models.CharField(max_length=50)
-    duration = models.DurationField()
+    duration = models.DurationField(blank=True, null=True)
     videos = models.FileField(
         upload_to='courses_videos/',
         default=os.path.join('videos', 'unknown_video.mp4'),
@@ -49,13 +50,15 @@ class Lesson(models.Model):
     
     def save(self, *args, **kwargs):
         # Calcola la durata del video solo se è impostato il video
+        super().save(*args, **kwargs)
+
         if self.videos:
             try:
                 video_path = self.videos.path
                 clip = VideoFileClip(video_path)
                 self.duration = timezone.timedelta(seconds=clip.duration)
             except OSError as e:
-                print(f"Errore nel caricare il video: {e}")
+                    print(f"Errore nel caricare il video: {e}")
 
         super().save(*args, **kwargs)
    

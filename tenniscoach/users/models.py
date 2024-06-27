@@ -21,6 +21,7 @@ class Profile(models.Model):
     name = models.CharField(max_length=20, null=True)
     surname = models.CharField(max_length=20, null=True)
     email = models.EmailField(null = True)
+    description = models.CharField(max_length=400, null=True, blank=True)
     picture = models.ImageField(
         upload_to='static/users_pics',
         default='/static/images/unknown_user.jpg',

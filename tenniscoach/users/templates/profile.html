@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-{% load static %}
 {% load crispy_forms_tags %}
 
 {% block title %} Profilo {% endblock %}
@@ -11,23 +10,26 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
-                    <h5 class="mb-0">Username: {{ user.username }}</h5>
+                    <h5 class="mb-0">Username: {{ object.user.username }}</h5>
                     <!-- Immagine del corso -->
-                    <img src="/media{{ object.picture.url }}" alt="Immagine del corso" class="img-fluid rounded" style="max-width: 120px;">
+                    <img src="/media{{ object.picture.url }}" alt="Immagine del profilo" class="img-fluid rounded" style="max-width: 120px;">
                 </div>
                 <div class="card-body">
                     <!-- Dettagli del corso -->
                     <ul class="list-group list-group-flush body-lesson">
                         <li class="list-group-item"><strong>Nome:</strong> {% if object.name %}{{ object.name }}{% endif %}</li>
                         <li class="list-group-item"><strong>Cognome:</strong> {% if object.surname %}{{ object.surname }}{% endif %}</li>
+                        <li class="list-group-item"><strong>Descrizione:</strong> {% if object.description %}{{ object.description }}{% endif %}</li>
                         <li class="list-group-item"><strong>Email:</strong> {% if object.email %}{{ object.email }}{% endif %}</li>
                     </ul>
                 </div>
                 <div class="card-body">
                     <!-- Pulsante Modifica -->
-                    <a class="btn btn-sm btn-outline-secondary" href="{% url 'users:modifica_profilo' %}">
-                        Modifica
-                    </a>
+                    {%if user.pk == object.pk %}
+                        <a class="btn btn-sm btn-outline-secondary" href="{% url 'users:modifica_profilo' %}">
+                            Modifica
+                        </a>
+                    {%endif%}
                 </div>
             </div>
         </div>

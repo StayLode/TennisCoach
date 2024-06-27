@@ -1,9 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from .forms import *
 from django.views.generic.edit import CreateView
 from django.contrib.auth.mixins import PermissionRequiredMixin
-from django.contrib.auth.decorators import user_passes_test
 from django.http import HttpRequest, HttpResponse, HttpResponseNotFound
 from django.views.static import serve
 from . import settings
@@ -40,10 +39,12 @@ def authorize_media_resource(request: HttpRequest) -> HttpResponse:
         document_root = settings.MEDIA_ROOT
         media_path = request.path.split("media")[1]
         return serve(request, media_path, document_root, False)
-    html = render_to_string('404.html', {})
-    return HttpResponseNotFound(html)
+    return redirect("403")
 
-    
+
+
+def custom_403_view(request):
+    return render(request, '403.html', status=403)
 
 def custom_404_view(request):
     return render(request, '404.html', status=404)

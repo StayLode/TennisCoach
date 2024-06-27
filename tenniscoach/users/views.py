@@ -5,7 +5,9 @@ from .forms import *
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.list import ListView
-from django.db.models import F
+from django.core.exceptions import PermissionDenied
+
+from django.contrib.auth.models import Group
 
 from django.core.paginator import Paginator
 
@@ -39,6 +41,11 @@ class CoachProfileDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         
+        # Verifica se l'utente associato al profilo è un coach
+        coach_group = Group.objects.get(name='Coach')
+        if not (self.object.user.groups.filter(name=coach_group.name).exists() or self.object.user.is_superuser):
+            raise PermissionDenied
+
         order_by = self.request.GET.get('order_by', 'title')
         
         courses = Course.objects.filter(user_id = self.object.id)
