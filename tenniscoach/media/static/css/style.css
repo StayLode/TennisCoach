@@ -101,6 +101,11 @@
   border: 2px solid #eab621;
   border-radius: 5px;
 }
+.card-title-wrap {
+  white-space: normal;
+  word-wrap: break-word;
+  max-width: 100%; /* Assicura che il titolo non superi la larghezza del contenitore */
+}
 .image-course{
   background-size:cover; 
   background-position: center;

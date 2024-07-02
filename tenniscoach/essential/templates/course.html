@@ -27,9 +27,9 @@
                     <!-- Pulsanti sopra il titolo del corso -->
                     <div>
                         {% if is_the_creator %}
-                            <a href="{% url 'essential:createdcourses'%}" class="btn"> Torna indietro </a>
+                            <a href="{% url 'essential:createdcourses'%}" class="btn"> I tuoi corsi </a>
                         {% else %}
-                            <a href="{% url 'essential:listacorsi'%}" class="btn"> Torna indietro </a>
+                            <a href="{% url 'users:dashboard'%}" class="btn"> I tuoi corsi </a>
                         {% endif %}
                         {% if user.is_superuser or is_the_creator %}
                         <div class="btn-group ml-2" role="group" aria-label="Pulsanti modifica e cancellazione">
@@ -56,9 +56,9 @@
                             {% endif %}
                         {% endif %}
                     </div>
-                    <h5 class="mb-0">{{ object.title }}</h5>
+                    <h5 class="mb-0 ">{{ object.title }}</h5>
                     <!-- Immagine del corso -->
-                    <img src="/media{{ object.picture.url }}" alt="Immagine del corso" class="img-fluid rounded" style="max-width: 150px;">
+                    <img src="/media{{ object.picture.url }}" alt="Immagine del corso" class="img-fluid rounded" style="max-width: 150px; margin-left:30px;">
                 </div>
                 <div class="card-body">
                     <!-- Dettagli del corso -->
@@ -130,9 +130,11 @@
                     <div class="ml-3">
                         <a>Creato da:</a>
                         <a class="coach-profile" href="{% url 'users:view_profile' coach.pk %}"> {{ coach.user }}</a>
+                        
                     </div>
                     <!-- Immagine profilo -->
-                    <img src="/media{{ coach.picture.url }}" alt="Immagine profilo" class="rounded-circle mr-3" style="width: 50px; height: 50px;">
+                    <img src="/media{{ coach.picture.url }}" alt="Immagine profilo" class="rounded-circle mr-3" style="width: 50px; height: 50px; margin-right: 20px;">
+                    <a> in data: {{object.date}}
                 </div>
             </div>
         </div>

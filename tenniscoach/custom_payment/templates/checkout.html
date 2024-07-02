@@ -35,7 +35,7 @@
                 <a href="{% url 'essential:corso' course.pk %}" class="btn">Indietro</a>
                 <button type="submit" class="btn btn-primary" id="submit-payment">Paga</button>
             </form>
-        </div>
+            </div>
         </div>
     </div>
 </div>
@@ -63,9 +63,15 @@
 
         cardElement.mount('#card-element');
 
+        
         const form = document.getElementById('payment-form');
         form.addEventListener('submit', async (event) => {
             event.preventDefault();
+            const cardholderName = document.getElementById('cardholder-name').value;
+            if (!cardholderName) {
+                document.getElementById('card-errors').textContent = "Il campo Titolare della carta è obbligatorio.";
+                return;
+            }
 
             const {error, paymentIntent} = await stripe.confirmCardPayment('{{ client_secret }}', {
                 payment_method: {

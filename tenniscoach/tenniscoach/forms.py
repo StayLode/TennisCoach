@@ -17,3 +17,5 @@ class CoachCreationForm(UserCreationForm):
         g = Group.objects.get(name="Coach") 
         g.user_set.add(user) 
         return user 
+
+

@@ -93,12 +93,12 @@
         <ul class="pagination mt-2 mb-0 justify-content-center n_text">
         <li class="page-item">
             {% if page_obj.has_previous %}
-                <a class='btn' href="?{% if request.GET.query %}query={{ request.GET.query }}{% endif %}{% if request.GET.coach %}&coach={{ request.GET.coach }}{% endif %}{% if request.GET.paid %}&paid={{ request.GET.paid }}{% endif %}{% if request.GET.free %}&free={{ request.GET.free }}{% endif %}{% if request.GET.level %}&level={{ request.GET.level }}{% endif %}{% if request.GET.ordering %}&ordering={{ request.GET.ordering }}{% endif %}{% if request.GET.order_by %}&order_by={{ request.GET.order_by }}{% endif %}&page={{ page_obj.previous_page_number }}"><</a>
+                <a class='btn' href="?query={{ request.GET.query }}&coach={{ request.GET.coach }}&paid={{ request.GET.paid }}&free={{ request.GET.free }}&level={{ request.GET.level }}&ordering={{ request.GET.ordering }}&order_by={{ request.GET.order_by }}&page={{ page_obj.previous_page_number }}"><</a>
             {% endif %}
         </li>
         <li class="page-item">
             {% if page_obj.has_next %}
-                <a class='btn' href="?{% if request.GET.query %}query={{ request.GET.query }}{% endif %}{% if request.GET.coach %}&coach={{ request.GET.coach }}{% endif %}{% if request.GET.paid %}&paid={{ request.GET.paid }}{% endif %}{% if request.GET.free %}&free={{ request.GET.free }}{% endif %}{% if request.GET.level %}&level={{ request.GET.level }}{% endif %}{% if request.GET.ordering %}&ordering={{ request.GET.ordering }}{% endif %}{% if request.GET.order_by %}&order_by={{ request.GET.order_by }}{% endif %}&page={{ page_obj.next_page_number }}">></a>
+                <a class='btn' href="?query={{ request.GET.query }}&coach={{ request.GET.coach }}&paid={{ request.GET.paid }}&free={{ request.GET.free }}&level={{ request.GET.level }}&ordering={{ request.GET.ordering }}&order_by={{ request.GET.order_by }}&page={{ page_obj.next_page_number }}">></a>
             {% endif %}
         </li>
       </ul>

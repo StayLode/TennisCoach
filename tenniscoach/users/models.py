@@ -31,25 +31,23 @@ class Profile(models.Model):
 
 
     def __str__(self):
-        print(self.user)
-        return self.user
+      return f"{self.user}: {self.name} {self.surname} ({self.email})"
 
     class Meta:
-        verbose_name_plural = "Utenti"
+        verbose_name_plural = "Profili utente"
 
-    
-    
+
     def has_permession_auth(self, resource:str):
-        #L'import va fatto dentro in modo che sia lazy; così facendo quando richiamo has_permession_auth Lesson sarà definita
-        from essential.models import Lesson
-        lesson = Lesson.objects.filter(video__icontains=resource)
-        if not lesson:
-          return False
-        
-        # Tra tutti i corsi che contengono la risorsa controllo se ce n'è almeno uno che è acquistato
-        if lesson.filter(course__pk__in=self.purchases.values('pk')):
-          return True
-        
-        if lesson.filter(course__user_id=self.id):
-          return True
+      #L'import va fatto dentro in modo che sia lazy; così facendo quando richiamo has_permession_auth Lesson sarà definita
+      from essential.models import Lesson
+      lesson = Lesson.objects.filter(video__icontains=resource)
+      if not lesson:
         return False
+      
+      # Tra tutti i corsi che contengono la risorsa controllo se ce n'è almeno uno che è acquistato
+      if lesson.filter(course__pk__in=self.purchases.values('pk')):
+        return True
+      
+      if lesson.filter(course__user_id=self.user.id):
+        return True
+      return False

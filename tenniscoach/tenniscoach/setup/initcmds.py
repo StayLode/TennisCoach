@@ -1,3 +1,4 @@
+import sys
 from essential.models import Course, Lesson, Purchase
 from users.models import Profile
 from django.contrib.auth.models import User
@@ -21,6 +22,9 @@ def reset_ids(tables):
 			cursor.execute(f"DELETE FROM sqlite_sequence WHERE name = '{t}';")
 
 def erase_db():
+	
+	if "test" in sys.argv:
+		return
 	print("Cancello il DB")
 	Purchase.objects.all().delete()
 	Payment.objects.all().delete()
@@ -30,6 +34,8 @@ def erase_db():
 	User.objects.all().delete()
 
 def init_db():
+	if "test" in sys.argv:
+		return
 	tables=["auth_user","essential_course","essential_lesson","users_profile","essential_purchase", "custom_payment_payment"]
 	reset_ids(tables)
 

@@ -19,23 +19,32 @@ from django.urls import path, include, re_path
 from .views import *
 from .setup.initcmds import *
 from django.contrib.auth import views as auth_views
-from . import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     
+    #Profile urls
     path('profile/', include('users.urls')),
+
+    #Core application urls
     path('', include('essential.urls')),
-    re_path(r'^media/.*$', authorize_media_resource),
-    path('payment/', include('custom_payment.urls')),
-    # User management related
     
+    #Block unauthorized access to media
+    re_path(r'^media/.*$', authorize_media_resource),
+
+    #Payment urls
+    path('payment/', include('custom_payment.urls')),
+    
+    # User management related
     path("register/", UserCreateView.as_view(), name="register"),
     path("registerc/", CoachCreateView.as_view(), name="registerc"),
     path("login/", auth_views.LoginView.as_view(), name="login"),
     path("logout/", auth_views.LogoutView.as_view(), name="logout"),
+
+    #Catch Errors
     path("not_authorized/", custom_403_view, name="403"),
-    re_path(r'.*/', custom_404_view, name='404'),
+    path("404/", custom_404_view, name='404'),
+    re_path(r'^.*$', custom_404_view),
 ]
 #erase_db()
 init_db()

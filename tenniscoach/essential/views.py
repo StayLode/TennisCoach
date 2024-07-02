@@ -7,8 +7,8 @@ from django.contrib.auth.mixins import AccessMixin
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
-from django.http import HttpRequest, HttpResponse
-
+from django.http import Http404, HttpRequest, HttpResponse
+from custom_payment.models import Payment
 # pipenv install django-braces
 from braces.views import GroupRequiredMixin
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -37,12 +37,12 @@ class CoursesListView(ListView):
 
         query = self.request.GET.get('query', '')
 
-        # Trying to imitate full text search.
-        splitted_query = query.split()
-        conditions_gen = (Q(title__icontains=word) for word in splitted_query)
-        ft_query = reduce(operator.and_, conditions_gen, Q())
+        # Trying to replicate full text search.
+        single_terms = query.split()
+        filter_gen = (Q(title__icontains=term) for term in single_terms)
+        query_fulltext = reduce(operator.and_, filter_gen, Q())
 
-        queryset = queryset.filter(ft_query)
+        queryset = queryset.filter(query_fulltext)
         coach = self.request.GET.get('coach', '')
         level = self.request.GET.get('level','')
         ordering = self.request.GET.get('ordering','')
@@ -66,7 +66,7 @@ class CoursesListView(ListView):
             pass
         
         try:
-            queryset = queryset.filter(user__username__icontains=coach)
+            queryset = queryset.filter(user__user__username__icontains=coach)
         except:
             pass
 
@@ -119,12 +119,26 @@ class CorsoDetailView(DetailView):
 
 @login_required
 def save_course(request, course_id):
-    corso = get_object_or_404(Course, id=course_id)
+
+    try:
+        corso = get_object_or_404(Course, id=course_id)
+    except Http404:
+        return redirect("404")
+    
     utente = request.user
     if (utente.id == corso.user_id):
         message = "Il corso è di tua proprietà!"
         messages.warning(request, message)
         return redirect("essential:createdcourses")
+   
+    purchased = Payment.objects.filter(description=course_id, billing_first_name = utente.username).exists()
+    
+    if corso.price > 0 and not purchased:
+        message = "Azione non consentita"
+        messages.success(request, message)
+        
+        return redirect("users:dashboard")
+
     # Verifica se l'utente ha già salvato questo corso
     _, created = Purchase.objects.get_or_create(user=utente.profile, course=corso, defaults={'date': timezone.now()})
 
@@ -166,7 +180,6 @@ class GroupRequiredMixin(AccessMixin):
         
         user_groups = request.user.groups.values_list('name', flat=True)
         if (not set(self.group_required).intersection(set(user_groups))) and not self.request.user.is_staff:
-            print("QUA")
             return self.handle_no_permission()
         
         return super().dispatch(request, *args, **kwargs)
@@ -206,6 +219,12 @@ class CreateCourseView(GroupRequiredMixin, CreateView):
         form.instance.user = self.request.user.profile  # Associa l'utente corrente come creatore del corso
         messages.success(self.request, self.success_message)
         return super().form_valid(form)
+    
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            return super().dispatch(request, *args, **kwargs)
+        except Http404:
+            return redirect("404")
 
 class CreateLessonView(CreateCourseView):
     form_class = CreateLessonForm
@@ -253,6 +272,13 @@ class DeleteCourseView(GroupRequiredMixin, DeleteView):
         messages.success(self.request, self.success_message)
         return redirect(self.success_url)
 
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            return super().dispatch(request, *args, **kwargs)
+        except Http404:
+            return redirect("404")
+
+
 class DeleteLessonView(DeleteCourseView):
     model = Lesson
     success_message = "Lezione eliminata con successo!"
@@ -283,6 +309,13 @@ class UpdateCorsoView(GroupRequiredMixin, UpdateView):
         context = super().get_context_data(**kwargs)
         context["entita"] = "Corso"
         return context
+    
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            return super().dispatch(request, *args, **kwargs)
+        except Http404:
+            return redirect("404")
+
     
 class UpdateLessonView(UpdateCorsoView):
     model = Lesson

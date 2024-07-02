@@ -17,6 +17,7 @@
                     {% csrf_token %}
                     {{ form | crispy }}
                     </form>
+                    <a href="{% url 'users:change_password' %}">Vuoi cambiare la password? Clicca qui</a>
                 </div>
                 <div class="card-footer">
                     <!-- Pulsante Modifica -->

@@ -35,6 +35,8 @@ class Course(models.Model):
     class Meta:
         verbose_name_plural = "Corsi"
     
+    def __str__(self):
+        return f"{self.title} - {self.user.user} - ({self.date.strftime('%Y-%m-%d')})"
     
 
 class Lesson(models.Model):
@@ -53,19 +55,24 @@ class Lesson(models.Model):
     def save(self, *args, **kwargs):
         # Calcola la durata del video solo se è impostato il video
         super().save(*args, **kwargs)
-
+        
+        
         if self.video:
             try:
                 video_path = self.video.path
                 clip = VideoFileClip(video_path)
                 self.duration = timezone.timedelta(seconds=clip.duration)
+                Lesson.objects.filter(pk=self.pk).update(duration=self.duration)
             except OSError as e:
-                    print(f"Errore nel caricare il video: {e}")
+                print(f"Errore nel caricare il video: {e}")
 
-        super().save(*args, **kwargs)
+
    
     class Meta:
         verbose_name_plural = "Lezioni"
+
+    def __str__(self):
+        return f"{self.title} ({self.course.title})"
 
 class Purchase(models.Model):    
     """
@@ -75,11 +82,13 @@ class Purchase(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     date = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return f"{self.user.user}: {self.user.name} {self.user.surname} - {self.course.title} ({self.date.strftime('%Y-%m-%d')})"
     
     class Meta:
         constraints = [
             UniqueConstraint(fields=['user', 'course'], name='unique_user_course')
         ]
-
+        verbose_name_plural = "Acquisti"
 
 

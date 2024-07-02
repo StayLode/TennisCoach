@@ -1,3 +1,4 @@
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect
 from .models import *
 from django.views.generic.detail import DetailView
@@ -6,9 +7,11 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.list import ListView
 from django.core.exceptions import PermissionDenied
-
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.views import PasswordChangeView
+from django.urls import reverse_lazy
 from django.contrib.auth.models import Group
-
+from django.contrib import messages
 from django.core.paginator import Paginator
 
 from essential.models import *
@@ -18,6 +21,15 @@ from essential.models import *
 class ProfileDetailView(LoginRequiredMixin, DetailView):
     model = Profile
     template_name = "profile.html"
+
+    def dispatch(self, request, *args, **kwargs):
+        # Ottieni l'ID utente dall'URL
+        profile_id = int(self.kwargs['pk'])
+        # Verifica se l'ID utente corrisponde a quello dell'utente loggato
+        if profile_id != self.request.user.id:
+            # Se non corrisponde, restituisci una risposta 403
+            return redirect("403")
+        return super().dispatch(request, *args, **kwargs)
 
 @login_required
 def modifica_profilo(request):
@@ -78,3 +90,17 @@ class YourCoursesListView(LoginRequiredMixin, ListView):
            queryset = queryset.order_by(order_by)
         
         return queryset
+    
+class ChangePasswordView(LoginRequiredMixin, PasswordChangeView):
+    form_class = PasswordChangeForm
+    template_name = 'change_password.html'
+    success_message = "Password modificata con successo!"
+
+    def form_valid(self, form):
+        # Aggiungi il messaggio di successo
+        messages.success(self.request, self.success_message)
+        return super().form_valid(form)
+    
+    def get_success_url(self):
+        # Costruisci l'URL di successo con l'ID dell'utente
+        return reverse_lazy('users:profile', kwargs={'pk': self.request.user.id})

@@ -1,3 +1,4 @@
+from django.http import Http404
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -14,14 +15,20 @@ stripe.api_key = settings.STRIPE_TEST_SECRET_KEY
 
 @login_required
 def checkout(request, course_id):
-    course = get_object_or_404(Course, id=course_id)
+    try:
+        course = get_object_or_404(Course, id=course_id)
+    except Http404:
+        return redirect("404")
+    
     purchased = Purchase.objects.filter(user_id=request.user.id, course_id=course.id).exists()
     user = request.user
 
+    #Verifica Proprietà del Corso: Se l'utente è il proprietario del corso, mostra un messaggio di avviso e reindirizza alla pagina dei corsi creati dall'utente.
     if (user.id == course.user_id):
         message = "Il corso è di tua proprietà!"
         messages.warning(request, message)
         return redirect("essential:createdcourses")
+    #Verifica Acquisti: Se l'utente ha già acquistato il corso, mostra un messaggio di avviso e reindirizza alla dashboard dell'utente.
     elif purchased:
         message = "Hai già acquistato questo corso!"
         messages.warning(request, message)
