@@ -4,11 +4,10 @@ from .views import *
 app_name = "users"
 
 urlpatterns = [
-	#re_path(r"^$|^\/$", , name="dash")
-    path('change/', modifica_profilo, name='modifica_profilo'),
-    path('view/<pk>', CoachProfileDetailView.as_view(), name='view_profile'),
+    path('change/', modify_profile, name='modifica_profilo'),
+    path('view/<int:pk>/', CoachProfileDetailView.as_view(), name='view_profile'),
     path('dashboard/', YourCoursesListView.as_view(), name='dashboard'),
     path('change-password/', ChangePasswordView.as_view(), name='change_password'),
-    path("<pk>/", ProfileDetailView.as_view(), name="profile"),   
+    path("<int:pk>/", ProfileDetailView.as_view(), name="profile"),   
 
 ] 

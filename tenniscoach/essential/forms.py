@@ -11,9 +11,9 @@ def validate_video(value):
     Funzione di validazione per controllare che il file sia un video.
     """
     ext = os.path.splitext(value.name)[1]  # Ottieni l'estensione del file
-    valid_extensions = ['.mp4', '.avi', '.mov', '.wmv']  # Estensioni di file video supportate
+    valid_extensions = ['.mp4']  # Estensioni di file video supportate
     if not ext.lower() in valid_extensions:
-        raise ValidationError(_('Il file caricato non è un video valido. Carica un file con estensione .mp4, .avi, .mov o .wmv.'))
+        raise ValidationError(_('Il file caricato non è un video valido. Carica un file con estensione .mp4'))
 
 class CreateLessonForm(forms.ModelForm):
     

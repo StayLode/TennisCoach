@@ -1,5 +1,5 @@
-from django.http import HttpRequest, HttpResponse
-from django.shortcuts import render, redirect
+from django.http import Http404
+from django.shortcuts import get_object_or_404, render, redirect
 from .models import *
 from django.views.generic.detail import DetailView
 from .forms import *
@@ -13,6 +13,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth.models import Group
 from django.contrib import messages
 from django.core.paginator import Paginator
+from braces.views import GroupRequiredMixin
 
 from essential.models import *
 # Create your views here.
@@ -24,20 +25,30 @@ class ProfileDetailView(LoginRequiredMixin, DetailView):
 
     def dispatch(self, request, *args, **kwargs):
         # Ottieni l'ID utente dall'URL
+        
         profile_id = int(self.kwargs['pk'])
+
+        #Verifica che tale profilo esista, altrimenti 404
+        try:
+            _ = get_object_or_404(Profile, pk=profile_id)
+        except Http404:
+            return redirect("404")
+
         # Verifica se l'ID utente corrisponde a quello dell'utente loggato
-        if profile_id != self.request.user.id:
+        if profile_id != self.request.user.id and not self.request.user.is_staff:
             # Se non corrisponde, restituisci una risposta 403
             return redirect("403")
         return super().dispatch(request, *args, **kwargs)
 
 @login_required
-def modifica_profilo(request):
+def modify_profile(request):
     profile = request.user.profile
     if request.method == 'POST':
         form = UserProfileForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
             # Salvataggio dei dati nel database
+            
+            messages.success(request, "Profilo modificato con successo!")
             form.save()
             return redirect('users:profile', profile.pk)  # Reindirizza a una vista successiva
     else:
@@ -49,30 +60,41 @@ def modifica_profilo(request):
 class CoachProfileDetailView(DetailView):
     model = Profile
     template_name = "presentation.html"
-
+    
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            return super().dispatch(request, *args, **kwargs)
+        except Http404:
+            return redirect("404")
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         
         # Verifica se l'utente associato al profilo è un coach
         coach_group = Group.objects.get(name='Coach')
-        if not (self.object.user.groups.filter(name=coach_group.name).exists() or self.object.user.is_superuser):
+        if not (self.object.user.groups.filter(name=coach_group.name).exists() or self.object.user.is_staff):
             raise PermissionDenied
 
-        order_by = self.request.GET.get('order_by', 'title')
+
+
+        order_by = self.request.GET.get('order_by', '')
         
         courses = Course.objects.filter(user_id = self.object.id)
-        if order_by:
-            courses = courses.order_by(order_by)
-        
+        try:
+            if order_by:
+                courses = courses.order_by(order_by)
+            else:
+                courses = courses.order_by("-purchases_number")
+        except:
+            pass
+
         paginator = Paginator(courses, 6)  # 6 corsi per pagina
         page_number = self.request.GET.get('page')
         page_obj = paginator.get_page(page_number)
 
 
         context['page_obj'] = page_obj
-        context['order_by'] = order_by
         context['full_name'] = f"{self.object.name} {self.object.surname}" if self.object.name and self.object.surname else None
-        context['courses'] = courses
         return context
     
 
@@ -85,9 +107,11 @@ class YourCoursesListView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         queryset =  self.request.user.profile.purchases.all()
-        order_by = self.request.GET.get('order_by', 'title')
+        order_by = self.request.GET.get('order_by', '')
         if order_by:
-           queryset = queryset.order_by(order_by)
+            queryset = queryset.order_by(order_by)
+        else:
+            queryset = queryset.order_by("-purchase__date")
         
         return queryset
     

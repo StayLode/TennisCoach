@@ -7,13 +7,14 @@ from django.contrib.auth.mixins import AccessMixin
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
-from django.http import Http404, HttpRequest, HttpResponse
+from django.http import Http404, HttpRequest, HttpResponse, JsonResponse
 from custom_payment.models import Payment
 # pipenv install django-braces
 from braces.views import GroupRequiredMixin
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 
+from django.contrib.auth.models import User
 
 from django.db.models import Q
 from functools import reduce
@@ -53,30 +54,24 @@ class CoursesListView(ListView):
         choices = {
             "Prezzo":"price",
             "Data": "date",
-            "Titolo": "title"
+            "Titolo": "title",
+            "Popolarità": "purchases_number"
         }
 
-        try:
-            if bool(paid) and not bool(free):
-                queryset = queryset.filter(price__gt=0)
-                
-            elif bool(free) and not bool(paid):
-                queryset = queryset.filter(price=0) 
-        except:
-            pass
+        if bool(paid) and not bool(free):
+            queryset = queryset.filter(price__gt=0)
+            
+        elif bool(free) and not bool(paid):
+            queryset = queryset.filter(price=0) 
         
-        try:
-            queryset = queryset.filter(user__user__username__icontains=coach)
-        except:
-            pass
-
-        try:
-            queryset = queryset.filter(category__icontains=level)
-        except:
-            pass
+        queryset = queryset.filter(user__user__username__icontains=coach)
+        queryset = queryset.filter(category__icontains=level)
+        
         try:
             if order_by:
                 queryset = queryset.order_by(ordering+choices[order_by])
+            else:
+                queryset = queryset.order_by("-purchases_number")
         except:
             pass
 
@@ -91,12 +86,30 @@ class CoursesListView(ListView):
             if user.groups.filter(name="Coach").exists():
                 context["coaches"].add(user)
         
-        context["ordinamenti"]=["Titolo", "Prezzo", "Data"]
+        context["ordinamenti"]=["Popolarità","Titolo", "Prezzo", "Data"]
         context["livelli"] = ["Principiante", "Intermedio", "Esperto"]
         return context
 
+def ajax_search_coaches(request):
+    term = request.GET.get('q', '')
+    coaches = list()
+    if term:
+        for user in User.objects.filter(username__icontains=term):
+            if user.groups.filter(name="Coach").exists():
+                coaches.append(user)
+    else:
+        for user in User.objects.all():
+            if user.groups.filter(name="Coach").exists():
+                coaches.append(user)
 
-class CorsoDetailView(DetailView):
+
+
+
+    results = [{'id': coach.id, 'username': coach.username} for coach in coaches]
+    print(results)
+    return JsonResponse(results, safe=False)
+
+class CourseDetailView(DetailView):
     model = Course
     template_name = "course.html"
 
@@ -109,12 +122,17 @@ class CorsoDetailView(DetailView):
 
         user = self.request.user
 
-        purchased=Purchase.objects.filter(course_id=context["object"].pk)
-        context["saved_by_current_user"] = purchased.filter(user_id=user.id).exists()
+        purchased=Purchase.objects.filter(course_id=context["object"].pk,user_id=user.id).exists()
+        context["saved_by_current_user"] = purchased
+        
+        if purchased:
+            context["purchase"] = Purchase.objects.get(user_id=user.id, course_id = context["object"].pk)
+
         if self.object.user_id == user.id:
             context["is_the_creator"] = True
         else:
             context["is_the_creator"] = False
+        
         return context
 
 @login_required
@@ -196,9 +214,14 @@ class CreatedCoursesListView(GroupRequiredMixin, ListView):
 
     def get_queryset(self):
         queryset = super().get_queryset().filter(user_id = self.request.user.pk)
-        order_by = self.request.GET.get('order_by', 'title')
-        if order_by:
-           queryset = queryset.order_by(order_by)
+        order_by = self.request.GET.get('order_by', '')
+        try:
+            if order_by:
+                queryset = queryset.order_by(order_by)
+            else:
+                queryset = queryset.order_by("-date")
+        except:
+            pass
         
         return queryset
 
@@ -296,7 +319,7 @@ class DeleteLessonView(DeleteCourseView):
         # Chiamare self.get_success_url() per ottenere l'URL di successo
         return redirect(reverse_lazy("essential:corso", kwargs={"pk": course_pk}))
 
-class UpdateCorsoView(GroupRequiredMixin, UpdateView):
+class UpdateCourseView(GroupRequiredMixin, UpdateView):
     group_required = ["Coach"]
     model = Course
     template_name = "edit.html"
@@ -317,7 +340,7 @@ class UpdateCorsoView(GroupRequiredMixin, UpdateView):
             return redirect("404")
 
     
-class UpdateLessonView(UpdateCorsoView):
+class UpdateLessonView(UpdateCourseView):
     model = Lesson
     form_class = CreateLessonForm
 

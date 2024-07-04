@@ -1,0 +1,28 @@
+-i https://pypi.org/simple
+asgiref==3.8.1; python_version >= '3.8'
+certifi==2024.6.2; python_version >= '3.6'
+charset-normalizer==3.3.2; python_full_version >= '3.7.0'
+colorama==0.4.6; platform_system == 'Windows'
+decorator==4.4.2
+django==5.0.6; python_version >= '3.10'
+django-bootstrap5==24.2; python_version >= '3.8'
+django-braces==1.15.0
+django-crispy-forms==2.2; python_version >= '3.8'
+django-payments==2.0.0
+django-phonenumber-field[phonenumberslite]==8.0.0; python_version >= '3.8'
+idna==3.7; python_version >= '3.5'
+imageio==2.34.2; python_version >= '3.4'
+imageio-ffmpeg==0.5.1; python_version >= '3.4'
+moviepy==1.0.3
+numpy==2.0.0; python_version != '2.7'
+phonenumberslite==8.13.40
+pillow==10.4.0; python_version >= '3.8'
+proglog==0.1.10
+requests==2.32.3; python_version >= '3.8'
+setuptools==70.2.0; python_version >= '3.8'
+sqlparse==0.5.0; python_version >= '3.8'
+stripe==10.1.0; python_version >= '3.6'
+tqdm==4.66.4; python_version >= '3.7'
+typing-extensions==4.12.2; python_version >= '3.7'
+tzdata==2024.1; sys_platform == 'win32'
+urllib3==2.2.2; python_version >= '3.8'

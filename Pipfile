@@ -5,6 +5,13 @@ name = "pypi"
 
 [packages]
 django = "*"
+django-braces = "*"
+pillow = "*"
+django-payments = "*"
+moviepy = "*"
+django-crispy-forms = "*"
+django-bootstrap5 = "*"
+stripe = "*"
 
 [dev-packages]
 

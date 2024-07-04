@@ -17,13 +17,10 @@
 
             <!-- Menu a tendina per il coach -->
             <div class="col col-md-4">
-                <select class="form-control price-label" name="coach">
-                    <option value="">Scegli coach</option>
-                    {% for coach in coaches %}
-                        <option value="{{ coach }}"> {{ coach }}</option>
-                    {% endfor %}
-                </select>
+                <input type="text" class="form-control price-label" name="coach" id="coach-input" placeholder="Cerca coach">
             </div>
+
+
 
             <!-- Slider per il range di prezzo -->
             <div class="col col-md-4">
@@ -109,8 +106,64 @@
 
 
 <script>
-    function updateRangeValue(value) {
-        document.getElementById('range_value').innerText = "0€ - " + value+"€";
+document.addEventListener('DOMContentLoaded', function() {
+    var input = document.getElementById('coach-input');
+
+    input.addEventListener('input', function() {
+        var searchText = this.value.trim();
+
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.status == 200) {
+                var data = JSON.parse(this.responseText);
+                updateSuggestions(data);
+            }
+        };
+
+        var url = '{% url 'essential:ajax_search_coaches' %}?q=' + encodeURIComponent(searchText);
+        xhttp.open("GET", url, true);
+        xhttp.send();
+    });
+
+    function updateSuggestions(data) {
+        // Costruisci l'elenco dei suggerimenti
+        var suggestions = [];
+        data.forEach(function(item) {
+            suggestions.push('<div class="suggestion-item" data-id="' + item.id + '">' + item.username + '</div>');
+        });
+
+        // Mostra i suggerimenti in un elemento div
+        var suggestionList = document.createElement('div');
+        suggestionList.innerHTML = suggestions.join('');
+        suggestionList.className = 'suggestion-list';
+
+        // Rimuovi eventuali suggerimenti precedenti
+        var existingSuggestionList = document.querySelector('.suggestion-list');
+        if (existingSuggestionList) {
+            existingSuggestionList.parentNode.removeChild(existingSuggestionList);
+        }
+
+        // Aggiungi la nuova lista di suggerimenti dopo l'input
+        input.parentNode.appendChild(suggestionList);
+
+        // Aggiungi gestori per selezionare un suggerimento
+        var suggestionItems = suggestionList.querySelectorAll('.suggestion-item');
+        suggestionItems.forEach(function(suggestion) {
+            suggestion.addEventListener('click', function() {
+                var id = this.getAttribute('data-id');
+                input.value = this.textContent.trim();
+                suggestionList.parentNode.removeChild(suggestionList);
+            });
+        });
+
+        // Chiudi la lista di suggerimenti se si fa clic altrove nella pagina
+        document.addEventListener('click', function(event) {
+            if (!suggestionList.contains(event.target) && event.target !== input) {
+                suggestionList.parentNode.removeChild(suggestionList);
+            }
+        });
     }
+});
 </script>
+
 {% endblock %}

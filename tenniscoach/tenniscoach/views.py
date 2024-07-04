@@ -9,9 +9,6 @@ from . import settings
 from django.template.loader import render_to_string
 import os
 
-def tennis_home(request):
-    return render(request, template_name="home.html")
-
 class UserCreateView(CreateView):
     #form_class = UserCreationForm
     form_class = CustomerCreationForm

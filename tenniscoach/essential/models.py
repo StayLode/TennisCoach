@@ -1,11 +1,15 @@
 from django.db import models
-from django.contrib.auth.models import User
 import os
+from django.db.models.signals import post_save, post_delete
+
+from django.dispatch import receiver
 from moviepy.editor import VideoFileClip
 from django.utils import timezone
 from users.models import Profile
 from django.core.validators import MinValueValidator
 from django.db.models import UniqueConstraint
+
+
 
 
 class Course(models.Model):
@@ -23,13 +27,12 @@ class Course(models.Model):
     )
     category = models.CharField(max_length=20)
     price = models.DecimalField(max_digits=4, decimal_places=2, validators=[MinValueValidator(0)])  
-    date = models.DateTimeField(auto_now_add=True)      
+    date = models.DateTimeField(auto_now_add=True) 
+    purchases_number = models.BigIntegerField(default=0, blank=True)     
     
     def isFree(self):
         return not(bool(self.price))
     
-    def getTitle(self):
-        return self.title[:45]+"..." if len(self.title)>50 else self.title
 
 
     class Meta:
@@ -92,3 +95,15 @@ class Purchase(models.Model):
         verbose_name_plural = "Acquisti"
 
 
+@receiver(post_save, sender=Purchase)
+def increment_purchases_number(sender, instance, created, **kwargs):
+    if created:
+        course = instance.course
+        course.purchases_number += 1
+        course.save()
+
+@receiver(post_delete, sender=Purchase)
+def decrement_purchases_number(sender, instance, **kwargs):
+    course = instance.course
+    course.purchases_number -= 1
+    course.save()

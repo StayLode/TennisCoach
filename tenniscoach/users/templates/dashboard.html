@@ -26,12 +26,14 @@
             <form method="get" class="form-inline d-flex align-items-center flex-nowrap">
                 <select name="order_by" class="form-control mr-2" style="margin: 5px;">
                     <option value="">Seleziona...</option>
+                    <option value="-purchases_number">Popolarità(decrescente)</option>
+                    <option value="purchases_number">Popolarità(crescente)</option>
                     <option value="title">Nome (A-Z)</option>
                     <option value="-title">Nome (Z-A)</option>
                     <option value="price">Prezzo (crescente)</option>
                     <option value="-price">Prezzo (decrescente)</option>
-                    <option value="date">Data d'acquisto(crescente)</option>
-                    <option value="-date">Data d'acquisto(decrescente)</option>
+                    <option value="purchase__date">Data d'acquisto(crescente)</option>
+                    <option value="-purchase__date">Data d'acquisto(decrescente)</option>
                 </select>
                 <button type="submit" class="btn btn-search btn-primary" style="margin: 5px;">Ordina</button>
             </form>

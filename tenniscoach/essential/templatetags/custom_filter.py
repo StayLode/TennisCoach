@@ -11,7 +11,9 @@ def format_timedelta(value):
         seconds = total_seconds % 60
 
         if hours > 0:
-            return f"{hours:02}:{minutes:02}:{seconds:02}"
+            return f"{hours:02}h {minutes:02}m {seconds:02}s"
+        elif minutes > 0:
+            return f"{minutes:02}m {seconds:02}s"
         else:
-            return f"{minutes:02}:{seconds:02}"
+            return f"{seconds:02}s"
     return value

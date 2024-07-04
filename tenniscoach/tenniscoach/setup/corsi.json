@@ -5,204 +5,168 @@
         "prezzo": 19.99,
         "lezioni": [
             {
-                "titolo": "Introduzione al Tennis",
-                "durata": "30:16"
+                "titolo": "Introduzione al Tennis"
             },
             {
-                "titolo": "Impugnature e Colpi",
-                "durata": "9:05"
+                "titolo": "Impugnature e Colpi"
             },
             {
-                "titolo": "Movimenti di Base",
-                "durata": "9:15"
+                "titolo": "Movimenti di Base"
             },
             {
-                "titolo": "Pratica di Base",
-                "durata": "27:31"
+                "titolo": "Pratica di Base"
             }
         ]
     },
     {
         "titolo": "Tecniche Avanzate di Tennis",
         "descrizione": "Questo corso è dedicato ai giocatori avanzati che vogliono perfezionare le loro tecniche e strategie di gioco.",
-        "prezzo": 34.99 ,
+        "prezzo": 34.99,
         "lezioni": [
             {
-                "titolo": "Servizi Avanzati",
-                "durata": "21:04"
+                "titolo": "Servizi Avanzati"
             },
             {
-                "titolo": "Rovescio Potente",
-                "durata": "28:50"
+                "titolo": "Rovescio Potente"
             },
             {
-                "titolo": "Tecniche di Volée",
-                "durata": "19:18"
+                "titolo": "Tecniche di Volée"
             },
             {
-                "titolo": "Strategie di Gioco",
-                "durata": "22:44"
+                "titolo": "Strategie di Gioco"
             },
             {
-                "titolo": "Allenamento Intensivo",
-                "durata": "8:48"
+                "titolo": "Allenamento Intensivo"
             }
         ]
     },
     {
         "titolo": "Preparazione Mentale per il Tennis",
         "descrizione": "Scopri come prepararti mentalmente per le partite di tennis, gestire lo stress e migliorare la concentrazione in campo.",
-        "prezzo": 22.99 ,
+        "prezzo": 22.99,
         "lezioni": [
             {
-                "titolo": "Introduzione alla Preparazione Mentale",
-                "durata": "17:28"
+                "titolo": "Introduzione alla Preparazione Mentale"
             },
             {
-                "titolo": "Tecniche di Respirazione",
-                "durata": "17:17"
+                "titolo": "Tecniche di Respirazione"
             },
             {
-                "titolo": "Visualizzazione e Focus",
-                "durata": "9:06"
+                "titolo": "Visualizzazione e Focus"
             },
             {
-                "titolo": "Gestione dello Stress",
-                "durata": "18:32"
+                "titolo": "Gestione dello Stress"
             }
         ]
     },
     {
         "titolo": "Strategie di Gioco per Principianti",
         "descrizione": "Impara le strategie di base per migliorare il tuo gioco, dalla posizione in campo alle tattiche per vincere i punti.",
-        "prezzo": 18.99 ,
+        "prezzo": 18.99,
         "lezioni": [
             {
-                "titolo": "Posizionamento in Campo",
-                "durata": "19:43"
+                "titolo": "Posizionamento in Campo"
             },
             {
-                "titolo": "Tattiche di Base",
-                "durata": "4:06"
+                "titolo": "Tattiche di Base"
             },
             {
-                "titolo": "Giocare a Rete",
-                "durata": "18:39"
+                "titolo": "Giocare a Rete"
             },
             {
-                "titolo": "Gestione dei Punti Chiave",
-                "durata": "14:07"
+                "titolo": "Gestione dei Punti Chiave"
             }
         ]
     },
     {
         "titolo": "Servizio e Risposta: Migliora il Tuo Gioco",
         "descrizione": "Un corso focalizzato sul miglioramento del servizio e della risposta, con tecniche per aumentare precisione e potenza.",
-        "prezzo": 29.99 ,
+        "prezzo": 29.99,
         "lezioni": [
             {
-                "titolo": "Tecniche di Servizio",
-                "durata": "29:33"
+                "titolo": "Tecniche di Servizio"
             },
             {
-                "titolo": "Pratica della Risposta",
-                "durata": "33:11"
+                "titolo": "Pratica della Risposta"
             }
         ]
     },
     {
         "titolo": "Allenamento Fisico per Tennisti",
         "descrizione": "Un programma di allenamento fisico specifico per tennisti, per migliorare forza, resistenza e agilità.",
-        "prezzo": 24.99 ,
+        "prezzo": 24.99,
         "lezioni": [
             {
-                "titolo": "Riscaldamento e Stretching",
-                "durata": "26:44"
+                "titolo": "Riscaldamento e Stretching"
             },
             {
-                "titolo": "Esercizi di Forza",
-                "durata": "27:55"
+                "titolo": "Esercizi di Forza"
             },
             {
-                "titolo": "Esercizi di Resistenza",
-                "durata": "6:38"
+                "titolo": "Esercizi di Resistenza"
             },
             {
-                "titolo": "Esercizi di Agilità",
-                "durata": "12:31"
+                "titolo": "Esercizi di Agilità"
             },
             {
-                "titolo": "Rafforzamento del Core",
-                "durata": "12:27"
+                "titolo": "Rafforzamento del Core"
             }
         ]
     },
     {
         "titolo": "Tecniche di Difesa nel Tennis",
         "descrizione": "Impara come difenderti efficacemente in campo, mantenendo la calma sotto pressione e contrattaccando con successo.",
-        "prezzo": 21.99 ,
+        "prezzo": 21.99,
         "lezioni": [
             {
-                "titolo": "Difesa di Base",
-                "durata": "14:01"
+                "titolo": "Difesa di Base"
             },
             {
-                "titolo": "Contrattacco",
-                "durata": "18:16"
+                "titolo": "Contrattacco"
             },
             {
-                "titolo": "Gestione delle Situazioni Difficili",
-                "durata": "28:44"
+                "titolo": "Gestione delle Situazioni Difficili"
             },
             {
-                "titolo": "Pratica Difensiva",
-                "durata": "8:51"
+                "titolo": "Pratica Difensiva"
             }
         ]
     },
     {
         "titolo": "Gioco di Volée: Domina la Rete",
         "descrizione": "Un corso completo per migliorare il gioco di volée, con esercizi specifici per precisione e reattività a rete.",
-        "prezzo": 27.99 ,
+        "prezzo": 27.99,
         "lezioni": [
             {
-                "titolo": "Introduzione al Gioco di Volée",
-                "durata": "16:05"
+                "titolo": "Introduzione al Gioco di Volée"
             },
             {
-                "titolo": "Tecniche di Volée",
-                "durata": "28:56"
+                "titolo": "Tecniche di Volée"
             },
             {
-                "titolo": "Esercizi di Volée",
-                "durata": "7:37"
+                "titolo": "Esercizi di Volée"
             },
             {
-                "titolo": "Pratica Avanzata di Volée",
-                "durata": "29:34"
+                "titolo": "Pratica Avanzata di Volée"
             }
         ]
     },
     {
         "titolo": "Tennis per Bambini: Divertimento e Apprendimento",
         "descrizione": "Un corso pensato per i bambini, per avvicinarli al tennis in modo divertente e educativo, sviluppando le loro abilità di base.",
-        "prezzo": 15.99 ,
+        "prezzo": 15.99,
         "lezioni": [
             {
-                "titolo": "Introduzione al Tennis per Bambini",
-                "durata": "22:00"
+                "titolo": "Introduzione al Tennis per Bambini"
             },
             {
-                "titolo": "Giochi e Esercizi",
-                "durata": "14:11"
+                "titolo": "Giochi e Esercizi"
             },
             {
-                "titolo": "Colpi di Base",
-                "durata": "28:13"
+                "titolo": "Colpi di Base"
             },
             {
-                "titolo": "Movimenti Divertenti",
-                "durata": "27:29"
+                "titolo": "Movimenti Divertenti"
             }
         ]
     },
@@ -212,248 +176,201 @@
         "prezzo": 26.99,
         "lezioni": [
             {
-                "titolo": "Analisi del Servizio Avversario",
-                "durata": "4:13"
+                "titolo": "Analisi del Servizio Avversario"
             },
             {
-                "titolo": "Tecniche di Ritorno",
-                "durata": "6:31"
+                "titolo": "Tecniche di Ritorno"
             },
             {
-                "titolo": "Esercizi di Precisione",
-                "durata": "4:27"
+                "titolo": "Esercizi di Precisione"
             },
             {
-                "titolo": "Pratica di Ritorno",
-                "durata": "6:44"
+                "titolo": "Pratica di Ritorno"
             }
         ]
     },
     {
         "titolo": "Approccio Mentale: Vincere con la Mente",
         "descrizione": "Scopri le tecniche mentali per mantenere la calma, aumentare la fiducia in te stesso e gestire la pressione durante le partite.",
-        "prezzo": 5.99 ,
+        "prezzo": 5.99,
         "lezioni": [
             {
-                "titolo": "Introduzione alla Psicologia del Tennis",
-                "durata": "17:21"
+                "titolo": "Introduzione alla Psicologia del Tennis"
             },
             {
-                "titolo": "Costruire la Fiducia",
-                "durata": "10:21"
+                "titolo": "Costruire la Fiducia"
             },
             {
-                "titolo": "Gestione della Pressione",
-                "durata": "22:02"
+                "titolo": "Gestione della Pressione"
             },
             {
-                "titolo": "Tecniche di Rilassamento",
-                "durata": "27:00"
+                "titolo": "Tecniche di Rilassamento"
             }
         ]
     },
     {
         "titolo": "Dritto Vincente: Impara il Colpo Base del Tennis",
         "descrizione": "Migliora il tuo dritto con questo corso completo che ti insegnerà la tecnica corretta passo dopo passo. Imparerai la presa, la posizione del corpo, il movimento del braccio e come generare potenza e topspin. Il corso include 8 lezioni video HD e una sessione di domande e risposte con un maestro di tennis.",
-        "prezzo": 29.99 ,
+        "prezzo": 29.99,
         "lezioni": [
             {
-                "titolo": "Introduzione e Riscaldamento",
-                "durata": "23:12"
+                "titolo": "Introduzione e Riscaldamento"
             },
             {
-                "titolo": "La Presa Corretta",
-                "durata": "22:30"
+                "titolo": "La Presa Corretta"
             },
             {
-                "titolo": "Posizione del Corpo e Preparazione",
-                "durata": "10:44"
+                "titolo": "Posizione del Corpo e Preparazione"
             },
             {
-                "titolo": "Movimento del Braccio e Impatto",
-                "durata": "17:28"
+                "titolo": "Movimento del Braccio e Impatto"
             },
             {
-                "titolo": "Generare Potenza e Topspin",
-                "durata": "25:37"
+                "titolo": "Generare Potenza e Topspin"
             },
             {
-                "titolo": "Drill e Esercizi",
-                "durata": "4:28"
+                "titolo": "Drill e Esercizi"
             },
             {
-                "titolo": "Errori Comuni e Come Correggerli",
-                "durata": "25:05"
+                "titolo": "Errori Comuni e Come Correggerli"
             },
             {
-                "titolo": "Domande e Risposte con il Maestro",
-                "durata": "30:00"
+                "titolo": "Domande e Risposte con il Maestro"
             }
         ]
     },
     {
         "titolo": "Rovescio Perfetto: Domina il Colpo Difensivo del Tennis",
         "descrizione": "Impara il rovescio a due mani come i professionisti con questo corso dettagliato. Ti guideremo attraverso la tecnica corretta, dalla presa e la posizione del corpo al movimento del braccio e la generazione di topspin. Il corso include 6 lezioni video HD e un bonus speciale: un allenamento per il rovescio con una macchina lanciapalle.",
-        "prezzo": 39.99 ,
+        "prezzo": 39.99,
         "lezioni": [
             {
-                "titolo": "Introduzione e Riscaldamento",
-                "durata": "5:08"
+                "titolo": "Introduzione e Riscaldamento"
             },
             {
-                "titolo": "La Presa Corretta",
-                "durata": "8:45"
+                "titolo": "La Presa Corretta"
             },
             {
-                "titolo": "Posizione del Corpo e Preparazione",
-                "durata": "18:30"
+                "titolo": "Posizione del Corpo e Preparazione"
             },
             {
-                "titolo": "Movimento del Braccio e Impatto",
-                "durata": "27:39"
+                "titolo": "Movimento del Braccio e Impatto"
             },
             {
-                "titolo": "Generare Topspin e Controllo",
-                "durata": "25:14"
+                "titolo": "Generare Topspin e Controllo"
             },
             {
-                "titolo": "Drill e Esercizi",
-                "durata": "23:37"
+                "titolo": "Drill e Esercizi"
             },
             {
-                "titolo": "Allenamento Bonus con Macchina Lanciapalle",
-                "durata": "25:54"
+                "titolo": "Allenamento Bonus con Macchina Lanciapalle"
             }
         ]
     },
     {
         "titolo": "Dritto Vincente: Maestro del Colpo Base",
         "descrizione": "Migliora il tuo dritto con questo corso completo e diventa un maestro del colpo base del tennis. Imparerai la tecnica corretta passo dopo passo, dalla presa alla posizione del corpo, dal movimento del braccio alla generazione di potenza e topspin. Il corso include 8 lezioni video HD e una sessione di domande e risposte con un maestro di tennis.",
-        "prezzo": 29.99 ,
+        "prezzo": 29.99,
         "lezioni": [
             {
-                "titolo": "Introduzione e Riscaldamento",
-                "durata": "28:48"
+                "titolo": "Introduzione e Riscaldamento"
             },
             {
-                "titolo": "La Presa Perfetta: La Base del Successo",
-                "durata": "16:18"
+                "titolo": "La Presa Perfetta: La Base del Successo"
             },
             {
-                "titolo": "Posizione del Corpo e Preparazione: Equilibrio e Potenza",
-                "durata": "26:24"
+                "titolo": "Posizione del Corpo e Preparazione: Equilibrio e Potenza"
             },
             {
-                "titolo": "Movimento del Braccio e Impatto: Generando Forza",
-                "durata": "26:38"
+                "titolo": "Movimento del Braccio e Impatto: Generando Forza"
             },
             {
-                "titolo": "Generare Potenza e Topspin: Colpi Devastati",
-                "durata": "25:37"
+                "titolo": "Generare Potenza e Topspin: Colpi Devastati"
             },
             {
-                "titolo": "Drill e Esercizi: Metti alla Prova le Tue Abilità",
-                "durata": "30:25"
+                "titolo": "Drill e Esercizi: Metti alla Prova le Tue Abilità"
             },
             {
-                "titolo": "Errori Comuni e Come Correggerli: Evita le Trappole",
-                "durata": "11:52"
+                "titolo": "Errori Comuni e Come Correggerli: Evita le Trappole"
             },
             {
-                "titolo": "Domande e Risposte con il Maestro: Chiarisci i Tuoi Dubbi",
-                "durata": "30:00"
+                "titolo": "Domande e Risposte con il Maestro: Chiarisci i Tuoi Dubbi"
             }
         ]
     },
     {
         "titolo": "Rovescio Implacabile: Domina il Colpo Difensivo",
         "descrizione": "Impara il rovescio a due mani come i professionisti con questo corso dettagliato e trasforma il tuo colpo difensivo in un'arma implacabile. Ti guideremo attraverso la tecnica corretta, dalla presa e la posizione del corpo al movimento del braccio e la generazione di topspin. Il corso include 6 lezioni video HD e un bonus speciale: un allenamento per il rovescio con una macchina lanciapalle.",
-        "prezzo": 39.99 ,
+        "prezzo": 39.99,
         "lezioni": [
             {
-                "titolo": "Introduzione e Riscaldamento",
-                "durata": "25:21"
+                "titolo": "Introduzione e Riscaldamento"
             },
             {
-                "titolo": "La Presa Perfetta: Stabilità e Controllo",
-                "durata": "7:50"
+                "titolo": "La Presa Perfetta: Stabilità e Controllo"
             },
             {
-                "titolo": "Posizione del Corpo e Preparazione: Equilibrio e Fluidità",
-                "durata": "15:28"
+                "titolo": "Posizione del Corpo e Preparazione: Equilibrio e Fluidità"
             },
             {
-                "titolo": "Movimento del Braccio e Impatto: Generando Topspin",
-                "durata": "20:47"
+                "titolo": "Movimento del Braccio e Impatto: Generando Topspin"
             },
             {
-                "titolo": "Generare Topspin e Controllo: Precisione e Potenza",
-                "durata": "25:14"
+                "titolo": "Generare Topspin e Controllo: Precisione e Potenza"
             },
             {
-                "titolo": "Drill e Esercizi: Affina le Tue Abilità",
-                "durata": "25:19"
+                "titolo": "Drill e Esercizi: Affina le Tue Abilità"
             },
             {
-                "titolo": "Allenamento Bonus con Macchina Lanciapalle: Sfida Te Stesso",
-                "durata": "24:51"
+                "titolo": "Allenamento Bonus con Macchina Lanciapalle: Sfida Te Stesso"
             }
         ]
     },
     {
         "titolo": "Tennis Pratico 101",
         "descrizione": "Un corso introduttivo che copre le basi del tennis, inclusi servizio, rovescio, colpo di diritto e molto altro.",
-        "prezzo": 19.99 ,
+        "prezzo": 19.99,
         "lezioni": [
             {
-                "titolo": "Introduzione al servizio",
-                "durata": "5:30"
+                "titolo": "Introduzione al servizio"
             },
             {
-                "titolo": "Rovescio: tecniche di base",
-                "durata": "7:20"
+                "titolo": "Rovescio: tecniche di base"
             }
         ]
     },
     {
         "titolo": "Mentalità del Tennis",
         "descrizione": "Questo corso esplora l'aspetto mentale del tennis, insegnando tecniche per rimanere concentrati e gestire la pressione.",
-        "prezzo": 29.99 ,
+        "prezzo": 29.99,
         "lezioni": [
             {
-                "titolo": "Gestione dello stress in partita",
-                "durata": "8:15"
+                "titolo": "Gestione dello stress in partita"
             },
             {
-                "titolo": "Mantenere la concentrazione",
-                "durata": "6:45"
+                "titolo": "Mantenere la concentrazione"
             },
             {
-                "titolo": "Gestione della vittoria e della sconfitta",
-                "durata": "7:10"
+                "titolo": "Gestione della vittoria e della sconfitta"
             }
         ]
     },
     {
         "titolo": "Tecniche Avanzate di Tennis",
         "descrizione": "Per i giocatori più esperti, questo corso copre tecniche avanzate per migliorare il tuo gioco.",
-        "prezzo": 39.99 ,
+        "prezzo": 39.99,
         "lezioni": [
             {
-                "titolo": "Servizio Avanzato",
-                "durata": "9:00"
+                "titolo": "Servizio Avanzato"
             },
             {
-                "titolo": "Tecniche di Rovescio Avanzate",
-                "durata": "8:30"
+                "titolo": "Tecniche di Rovescio Avanzate"
             },
             {
-                "titolo": "Strategie di Partita",
-                "durata": "10:00"
+                "titolo": "Strategie di Partita"
             },
             {
-                "titolo": "Tecniche di Allenamento",
-                "durata": "7:45"
+                "titolo": "Tecniche di Allenamento"
             }
         ]
     },
@@ -463,12 +380,10 @@
         "prezzo": 0,
         "lezioni": [
             {
-                "titolo": "Fondamentali del Servizio Potente",
-                "durata": "6:45"
+                "titolo": "Fondamentali del Servizio Potente"
             },
             {
-                "titolo": "Esercizi di Potenziamento per il Servizio",
-                "durata": "21:04"
+                "titolo": "Esercizi di Potenziamento per il Servizio"
             }
         ]
     },
@@ -478,16 +393,13 @@
         "prezzo": 0,
         "lezioni": [
             {
-                "titolo": "Introduzione alla Forza Mentale",
-                "durata": "14:01"
+                "titolo": "Introduzione alla Forza Mentale"
             },
             {
-                "titolo": "Gestione dello Stress in Campo",
-                "durata": "6:45"
+                "titolo": "Gestione dello Stress in Campo"
             },
             {
-                "titolo": "Costruire la Fiducia",
-                "durata": "10:22"
+                "titolo": "Costruire la Fiducia"
             }
         ]
     },
@@ -497,16 +409,13 @@
         "prezzo": 0,
         "lezioni": [
             {
-                "titolo": "Fondamentali del Rovescio",
-                "durata": "6:45"
+                "titolo": "Fondamentali del Rovescio"
             },
             {
-                "titolo": "Rovescio a Una Mano vs Rovescio a Due Mani",
-                "durata": "12:27"
+                "titolo": "Rovescio a Una Mano vs Rovescio a Due Mani"
             },
             {
-                "titolo": "Esercizi di Pratica per il Rovescio",
-                "durata": "10:22"
+                "titolo": "Esercizi di Pratica per il Rovescio"
             }
         ]
     },
@@ -516,16 +425,13 @@
         "prezzo": 0,
         "lezioni": [
             {
-                "titolo": "Introduzione alle Strategie di Gioco",
-                "durata": "11:10"
+                "titolo": "Introduzione alle Strategie di Gioco"
             },
             {
-                "titolo": "Analisi delle Situazioni di Gioco",
-                "durata": "10:22"
+                "titolo": "Analisi delle Situazioni di Gioco"
             },
             {
-                "titolo": "Decisioni Tattiche in Campo",
-                "durata": "8:30"
+                "titolo": "Decisioni Tattiche in Campo"
             }
         ]
     },
@@ -535,16 +441,13 @@
         "prezzo": 0,
         "lezioni": [
             {
-                "titolo": "Introduzione alla Resilienza Mentale",
-                "durata": "25:19"
+                "titolo": "Introduzione alla Resilienza Mentale"
             },
             {
-                "titolo": "Tecniche di Gestione dello Stress",
-                "durata": "12:27"
+                "titolo": "Tecniche di Gestione dello Stress"
             },
             {
-                "titolo": "Esercizi di Mindfulness per il Tennis",
-                "durata": "11:10"
+                "titolo": "Esercizi di Mindfulness per il Tennis"
             }
         ]
     },
@@ -554,20 +457,16 @@
         "prezzo": 0,
         "lezioni": [
             {
-                "titolo": "Vincere la paura e l'ansia da gara",
-                "durata": "18:10"
+                "titolo": "Vincere la paura e l'ansia da gara"
             },
             {
-                "titolo": "Mantenere la concentrazione e il focus",
-                "durata": "30:20"
+                "titolo": "Mantenere la concentrazione e il focus"
             },
             {
-                "titolo": " Sviluppare una mentalità resiliente",
-                "durata": "8:30"
+                "titolo": " Sviluppare una mentalità resiliente"
             },
             {
-                "titolo": "Potenziare la tua motivazione e la tua grinta",
-                "durata": "13:27"
+                "titolo": "Potenziare la tua motivazione e la tua grinta"
             }
         ]
     },
@@ -577,24 +476,19 @@
         "prezzo": 0,
         "lezioni": [
             {
-                "titolo": "Analisi dell'avversario e lettura del gioco",
-                "durata": "9:55"
+                "titolo": "Analisi dell'avversario e lettura del gioco"
             },
             {
-                "titolo": "Costruire il punto vincente",
-                "durata": "18:10"
+                "titolo": "Costruire il punto vincente"
             },
             {
-                "titolo": " Gestione del match e tattiche di gioco",
-                "durata": "11:10"
+                "titolo": " Gestione del match e tattiche di gioco"
             },
             {
-                "titolo": "Giocare sotto pressione e gestire i momenti cruciali",
-                "durata": "8:30"
+                "titolo": "Giocare sotto pressione e gestire i momenti cruciali"
             },
             {
-                "titolo": "Analisi del match e pianificazione delle strategie future",
-                "durata": "13:27"
+                "titolo": "Analisi del match e pianificazione delle strategie future"
             }
         ]
     },
@@ -604,32 +498,25 @@
         "prezzo": 0,
         "lezioni": [
             {
-                "titolo": "Impugnatura e preparazione al colpo",
-                "durata": "17:55"
+                "titolo": "Impugnatura e preparazione al colpo"
             },
             {
-                "titolo": "Backswing e swing",
-                "durata": "18:10"
+                "titolo": "Backswing e swing"
             },
             {
-                "titolo": "Footwork e posizionamento in campo",
-                "durata": "10:22"
+                "titolo": "Footwork e posizionamento in campo"
             },
             {
-                "titolo": "Rovescio slice e lift",
-                "durata": "9:55"
+                "titolo": "Rovescio slice e lift"
             },
             {
-                "titolo": "Rovescio in corsa e controvento",
-                "durata": "25:19"
+                "titolo": "Rovescio in corsa e controvento"
             },
             {
-                "titolo": "Rovescio in risposta alla battuta",
-                "durata": "30:20"
+                "titolo": "Rovescio in risposta alla battuta"
             },
             {
-                "titolo": "Rovescio in situazioni di gioco avanzate",
-                "durata": "13:27"
+                "titolo": "Rovescio in situazioni di gioco avanzate"
             }
         ]
     },
@@ -639,20 +526,16 @@
         "prezzo": 0,
         "lezioni": [
             {
-                "titolo": "Lancio della palla e impugnatura",
-                "durata": "30:20"
+                "titolo": "Lancio della palla e impugnatura"
             },
             {
-                "titolo": "Servizio piatto, slice e lift",
-                "durata": "25:19"
+                "titolo": "Servizio piatto, slice e lift"
             },
             {
-                "titolo": "Servizio in kick e underhand",
-                "durata": "12:27"
+                "titolo": "Servizio in kick e underhand"
             },
             {
-                "titolo": "Variare il servizio e sorprendere l'avversario",
-                "durata": "8:30"
+                "titolo": "Variare il servizio e sorprendere l'avversario"
             }
         ]
     },
@@ -662,20 +545,16 @@
         "prezzo": 0,
         "lezioni": [
             {
-                "titolo": "Impugnatura e preparazione al colpo",
-                "durata": "11:10"
+                "titolo": "Impugnatura e preparazione al colpo"
             },
             {
-                "titolo": "Volée di dritto e rovescio",
-                "durata": "10:22"
+                "titolo": "Volée di dritto e rovescio"
             },
             {
-                "titolo": "Volée alta e bassa",
-                "durata": "17:55"
+                "titolo": "Volée alta e bassa"
             },
             {
-                "titolo": "Volée in movimento e in corsa",
-                "durata": "8:30"
+                "titolo": "Volée in movimento e in corsa"
             }
         ]
     },
@@ -685,12 +564,10 @@
         "prezzo": 0,
         "lezioni": [
             {
-                "titolo": "Smorzate di dritto e rovescio",
-                "durata": "13:27"
+                "titolo": "Smorzate di dritto e rovescio"
             },
             {
-                "titolo": "Smorzate in situazioni di gioco avanzate",
-                "durata": "17:55"
+                "titolo": "Smorzate in situazioni di gioco avanzate"
             }
         ]
     },
@@ -700,20 +577,16 @@
         "prezzo": 0,
         "lezioni": [
             {
-                "titolo": "Dritto piatto, slice e lift",
-                "durata": "9:55"
+                "titolo": "Dritto piatto, slice e lift"
             },
             {
-                "titolo": "Dritto incrociato e lungolinea",
-                "durata": "18:10"
+                "titolo": "Dritto incrociato e lungolinea"
             },
             {
-                "titolo": "Impugnatura e preparazione al colpo",
-                "durata": "30:20"
+                "titolo": "Impugnatura e preparazione al colpo"
             },
             {
-                "titolo": "Dritto in situazioni di gioco finali",
-                "durata": "14:32"
+                "titolo": "Dritto in situazioni di gioco finali"
             }
         ]
     },
@@ -723,20 +596,16 @@
         "prezzo": 0,
         "lezioni": [
             {
-                "titolo": "Topspin di dritto e rovescio",
-                "durata": "30:20"
+                "titolo": "Topspin di dritto e rovescio"
             },
             {
-                "titolo": "Efficacia del Topspin",
-                "durata": "13:27"
+                "titolo": "Efficacia del Topspin"
             },
             {
-                "titolo": "Più rotazione, minor potenza",
-                "durata": "10:22"
+                "titolo": "Più rotazione, minor potenza"
             },
             {
-                "titolo": "Topspin nei vari tipi di campo",
-                "durata": "8:30"
+                "titolo": "Topspin nei vari tipi di campo"
             }
         ]
     },
@@ -746,16 +615,13 @@
         "prezzo": 0,
         "lezioni": [
             {
-                "titolo": "Backhand slice piatto e liftato",
-                "durata": "8:30"
+                "titolo": "Backhand slice piatto e liftato"
             },
             {
-                "titolo": "Backhand in situazioni di difesa",
-                "durata": "9:55"
+                "titolo": "Backhand in situazioni di difesa"
             },
             {
-                "titolo": "Slice da fondo campo",
-                "durata": "30:20"
+                "titolo": "Slice da fondo campo"
             }
         ]
     },
@@ -765,20 +631,16 @@
         "prezzo": 0,
         "lezioni": [
             {
-                "titolo": "Lob Alto e Basso",
-                "durata": "25:19"
+                "titolo": "Lob Alto e Basso"
             },
             {
-                "titolo": "Impugnatura e Preparazione al Colpo",
-                "durata": "18:10"
+                "titolo": "Impugnatura e Preparazione al Colpo"
             },
             {
-                "titolo": "Lob in Movimento e in Corsa",
-                "durata": "12:27"
+                "titolo": "Lob in Movimento e in Corsa"
             },
             {
-                "titolo": "Lob in Situazioni di Gioco Avanzate",
-                "durata": "6:45"
+                "titolo": "Lob in Situazioni di Gioco Avanzate"
             }
         ]
     },
@@ -788,12 +650,10 @@
         "prezzo": 0,
         "lezioni": [
             {
-                "titolo": "Impugnatura e Preparazione al Colpo",
-                "durata": "30:20"
+                "titolo": "Impugnatura e Preparazione al Colpo"
             },
             {
-                "titolo": "Drop Shot in Movimento e in Corsa",
-                "durata": "13:27"
+                "titolo": "Drop Shot in Movimento e in Corsa"
             }
         ]
     },
@@ -803,20 +663,16 @@
         "prezzo": 0,
         "lezioni": [
             {
-                "titolo": "Forza Esplosiva per Colpi Potenti",
-                "durata": "30:20"
+                "titolo": "Forza Esplosiva per Colpi Potenti"
             },
             {
-                "titolo": "Resistenza Aerobica per Durate Lunghe",
-                "durata": "9:55"
+                "titolo": "Resistenza Aerobica per Durate Lunghe"
             },
             {
-                "titolo": "Recupero Rapido per Massimizzare le Prestazioni",
-                "durata": "10:22"
+                "titolo": "Recupero Rapido per Massimizzare le Prestazioni"
             },
             {
-                "titolo": "Prevenzione Infortuni per Giocare in Sicurezza",
-                "durata": "8:30"
+                "titolo": "Prevenzione Infortuni per Giocare in Sicurezza"
             }
         ]
     },
@@ -826,12 +682,10 @@
         "prezzo": 0,
         "lezioni": [
             {
-                "titolo": "Footwork per Dritto e Rovescio",
-                "durata": "6:45"
+                "titolo": "Footwork per Dritto e Rovescio"
             },
             {
-                "titolo": "Footwork per Volée e Servizio",
-                "durata": "25:19"
+                "titolo": "Footwork per Volée e Servizio"
             }
         ]
     },
@@ -841,20 +695,16 @@
         "prezzo": 0,
         "lezioni": [
             {
-                "titolo": "Sviluppare un Tocco Delicato",
-                "durata": "11:10"
+                "titolo": "Sviluppare un Tocco Delicato"
             },
             {
-                "titolo": "Allenare la Sensibilità Tattile",
-                "durata": "6:45"
+                "titolo": "Allenare la Sensibilità Tattile"
             },
             {
-                "titolo": "Perfezionare la Coordinazione Occhio-Mano",
-                "durata": "17:55"
+                "titolo": "Perfezionare la Coordinazione Occhio-Mano"
             },
             {
-                "titolo": "Colpi Precisi e Vari in Ogni Situazione",
-                "durata": "14:32"
+                "titolo": "Colpi Precisi e Vari in Ogni Situazione"
             }
         ]
     },
@@ -864,24 +714,19 @@
         "prezzo": 0,
         "lezioni": [
             {
-                "titolo": "Comunicazione Efficace con il Compagno",
-                "durata": "30:20"
+                "titolo": "Comunicazione Efficace con il Compagno"
             },
             {
-                "titolo": "Posizionamento Strategico in Campo",
-                "durata": "6:45"
+                "titolo": "Posizionamento Strategico in Campo"
             },
             {
-                "titolo": "Coordinazione dei Colpi per Attacchi Efficaci",
-                "durata": "18:10"
+                "titolo": "Coordinazione dei Colpi per Attacchi Efficaci"
             },
             {
-                "titolo": "Difese Solidi contro Ogni Avversario",
-                "durata": "25:19"
+                "titolo": "Difese Solidi contro Ogni Avversario"
             },
             {
-                "titolo": "Sfruttare i Punti di Forza di Entrambi",
-                "durata": "10:22"
+                "titolo": "Sfruttare i Punti di Forza di Entrambi"
             }
         ]
     },
@@ -891,24 +736,19 @@
         "prezzo": 0,
         "lezioni": [
             {
-                "titolo": "Creare una Routine Pre-Gara Efficace",
-                "durata": "6:45"
+                "titolo": "Creare una Routine Pre-Gara Efficace"
             },
             {
-                "titolo": "Raggiungere la Concentrazione Mentale Ideale",
-                "durata": "12:27"
+                "titolo": "Raggiungere la Concentrazione Mentale Ideale"
             },
             {
-                "titolo": "Tecniche di Visualizzazione per il Successo",
-                "durata": "11:10"
+                "titolo": "Tecniche di Visualizzazione per il Successo"
             },
             {
-                "titolo": "Respirazione e Controllo dell'Ansia",
-                "durata": "30:20"
+                "titolo": "Respirazione e Controllo dell'Ansia"
             },
             {
-                "titolo": "Auto-Motivazione per Vincere",
-                "durata": "17:55"
+                "titolo": "Auto-Motivazione per Vincere"
             }
         ]
     },
@@ -918,16 +758,13 @@
         "prezzo": 0,
         "lezioni": [
             {
-                "titolo": "Imparare le basi del tennis in modo facile e divertente",
-                "durata": "6:45"
+                "titolo": "Imparare le basi del tennis in modo facile e divertente"
             },
             {
-                "titolo": "Tonificare il corpo e bruciare calorie",
-                "durata": "11:10"
+                "titolo": "Tonificare il corpo e bruciare calorie"
             },
             {
-                "titolo": "Sviluppare una sana competitività e socializzare con altre donne",
-                "durata": "25:19"
+                "titolo": "Sviluppare una sana competitività e socializzare con altre donne"
             }
         ]
     },
@@ -937,12 +774,10 @@
         "prezzo": 0,
         "lezioni": [
             {
-                "titolo": "Divertimento e svago in un ambiente sicuro e accogliente",
-                "durata": "18:10"
+                "titolo": "Divertimento e svago in un ambiente sicuro e accogliente"
             },
             {
-                "titolo": "Riduzione del rischio di malattie croniche",
-                "durata": "12:27"
+                "titolo": "Riduzione del rischio di malattie croniche"
             }
         ]
     },
@@ -952,16 +787,13 @@
         "prezzo": 0,
         "lezioni": [
             {
-                "titolo": "Bruciare calorie e tonificare il corpo in modo efficace",
-                "durata": "17:55"
+                "titolo": "Bruciare calorie e tonificare il corpo in modo efficace"
             },
             {
-                "titolo": "Sviluppare forza muscolare e flessibilità",
-                "durata": "10:22"
+                "titolo": "Sviluppare forza muscolare e flessibilità"
             },
             {
-                "titolo": "Migliorare la resistenza e la forma fisica",
-                "durata": "11:10"
+                "titolo": "Migliorare la resistenza e la forma fisica"
             }
         ]
     },
@@ -971,20 +803,16 @@
         "prezzo": 0,
         "lezioni": [
             {
-                "titolo": "concentrazione e la capacità di focus",
-                "durata": "8:30"
+                "titolo": "concentrazione e la capacità di focus"
             },
             {
-                "titolo": "Ridurre lo stress e l'ansia",
-                "durata": "25:19"
+                "titolo": "Ridurre lo stress e l'ansia"
             },
             {
-                "titolo": "Come giocare a tennis con maggiore calma e lucidità",
-                "durata": "6:45"
+                "titolo": "Come giocare a tennis con maggiore calma e lucidità"
             },
             {
-                "titolo": "Aumentare la consapevolezza di sé e del proprio corpo",
-                "durata": "17:55"
+                "titolo": "Aumentare la consapevolezza di sé e del proprio corpo"
             }
         ]
     },
@@ -994,18 +822,14 @@
         "prezzo": 0,
         "lezioni": [
             {
-                "titolo": "Impugnatura della racchetta",
-                "durata": "25:19"
+                "titolo": "Impugnatura della racchetta"
             },
             {
-                "titolo": "Colpi fondamentali",
-                "durata": "6:45"
+                "titolo": "Colpi fondamentali"
             },
             {
-                "titolo": "Regole del gioco",
-                "durata": "10:22"
+                "titolo": "Regole del gioco"
             }
         ]
     }
-
 ]

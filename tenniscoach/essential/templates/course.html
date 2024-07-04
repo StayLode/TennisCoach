@@ -41,7 +41,7 @@
                             </a>
                         </div>
                         {%endif%}
-                        {% if user.is_authenticated and not saved_by_current_user and not is_the_creator %}
+                        {% if not saved_by_current_user and not is_the_creator %}
                             <!-- Mostra pulsanti solo se il corso non è stato salvato -->
                             {% if object.price != 0 %}
                                 <form id="checkout-form" method="post" action="{% url 'custom_payment:checkout' object.pk %}">
@@ -66,6 +66,7 @@
                         <li class="list-group-item"><strong>Descrizione:</strong> {{ object.description }}</li>
                         <li class="list-group-item"><strong>Livello:</strong> {{ object.category }}</li>
                         <li class="list-group-item"><strong>Prezzo:</strong> {% if object.isFree %}Gratis{% else %}{{ object.price }}€{% endif %}</li>
+                        <li class="list-group-item"><strong>Acquistato:</strong> {{ object.purchases_number }} {% if object.purchases_number == 1 %} volta {% else %} volte {%endif%}</li>
                         <!-- Aggiungi altri campi del corso qui -->
                     </ul>
                 </div>
@@ -124,7 +125,13 @@
                         </div>
                         <!-- Fine Modal -->
                     {% endfor %}
+                    <div>
+                    {% if saved_by_current_user %}
+                    <p> <strong> Acquistato in data: </strong> {{purchase.date}} </p>
+                    {% endif %}
+                    </div>
                 </div>
+
                 <div class="card-footer d-flex justify-content-center align-items-center">
                     <!-- Testo dell'utente del coach -->
                     <div class="ml-3">
