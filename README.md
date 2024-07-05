@@ -52,9 +52,10 @@ python manage.py makemigrations
 python manage.py migrate
 ```
 ### 5. Populate DB:
-Uncomment line with erase_db in tenniscoach/urls.py. It will insert random entries in your SqliteDB.
-
-Once creation is finished, re-comment this line.
+Run the _setup.py_ file, which contains tools to erase and create the SQLite DB.
+```bash
+python setup.pyì
+```
 
 ### 6. Start the server, only in development mode:
 Start the Django server:
@@ -62,7 +63,7 @@ Start the Django server:
 python manage.py runserver
 ```
 ### 7. Usage
-Once the server is running, you can access the online tennis courses and use the available features.
+Once the server is running, you can access the online tennis courses.
 Go to http://localhost:8000/ and start exploring.
 
 **Utenti di prova**
