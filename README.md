@@ -1,13 +1,17 @@
 # TennisCoach project
 
 TechWeb Programmaing Project, based on Django.
+
 This project aims to revolutionize tennis learning by creating a robust, scalable, and user-friendly platform for purchasing and accessing high-quality online courses
 
 ## Required Libraries
 
 django==5.0.6; -> framework principale utilizzato per sviluppare l'applicazione web
+
 django-bootstrap5==24.2; -> integra Bootstrap 5 con Django
+
 django-braces==1.15.0 -> fornisce un insieme di mixins che facilitano l'implementazione di funzionalità comuni nelle viste class-based (CBV) di Django, come il controllo dell'appartenenza ad un gruppo.
+
 django-crispy-forms==2.2; -> facilita la gestione dei form Django
 django-payments==2.0.0; -> fornisce un'astrazione comune per gestire pagamenti online con diversi provider di pagamento
 moviepy==1.0.3; -> libreria usata per gestire i video ed estrarne la lunghezza
