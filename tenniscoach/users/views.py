@@ -18,7 +18,7 @@ from braces.views import GroupRequiredMixin
 from essential.models import *
 # Create your views here.
 
-
+#CBV che mostra il profilo dell'utente loggato
 class ProfileDetailView(LoginRequiredMixin, DetailView):
     model = Profile
     template_name = "profile.html"
@@ -40,6 +40,7 @@ class ProfileDetailView(LoginRequiredMixin, DetailView):
             return redirect("403")
         return super().dispatch(request, *args, **kwargs)
 
+#FBV che permette di aggiornare il proprio profilo
 @login_required
 def modify_profile(request):
     profile = request.user.profile
@@ -56,13 +57,19 @@ def modify_profile(request):
     
     return render(request, 'edit_profile.html', {'form': form})
 
-
+#CBV che mostra una pagina profilo di un coach con i relativi corsi messi a disposizione
 class CoachProfileDetailView(DetailView):
     model = Profile
     template_name = "presentation.html"
     
     def dispatch(self, request, *args, **kwargs):
         try:
+            self.object = self.get_object()
+            coach_group = Group.objects.get(name='Coach')
+            
+            # Verifica se l'utente associato al profilo è un coach
+            if not (self.object.user.groups.filter(name=coach_group.name).exists() or self.object.user.is_staff):
+                return redirect("403")
             return super().dispatch(request, *args, **kwargs)
         except Http404:
             return redirect("404")
@@ -70,13 +77,6 @@ class CoachProfileDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         
-        # Verifica se l'utente associato al profilo è un coach
-        coach_group = Group.objects.get(name='Coach')
-        if not (self.object.user.groups.filter(name=coach_group.name).exists() or self.object.user.is_staff):
-            raise PermissionDenied
-
-
-
         order_by = self.request.GET.get('order_by', '')
         
         courses = Course.objects.filter(user_id = self.object.id)
@@ -92,13 +92,11 @@ class CoachProfileDetailView(DetailView):
         page_number = self.request.GET.get('page')
         page_obj = paginator.get_page(page_number)
 
-
         context['page_obj'] = page_obj
         context['full_name'] = f"{self.object.name} {self.object.surname}" if self.object.name and self.object.surname else None
         return context
     
-
-    
+#CBV che permette di visualizzare l'elenco dei corsi acquistati dall'utente
 class YourCoursesListView(LoginRequiredMixin, ListView):
     model = Profile
     template_name = "dashboard.html"
@@ -114,7 +112,8 @@ class YourCoursesListView(LoginRequiredMixin, ListView):
             queryset = queryset.order_by("-purchase__date")
         
         return queryset
-    
+
+#CBV che gestisce il cambiamento della password per l'utente loggato
 class ChangePasswordView(LoginRequiredMixin, PasswordChangeView):
     form_class = PasswordChangeForm
     template_name = 'change_password.html'

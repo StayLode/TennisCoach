@@ -13,6 +13,7 @@ from payments import get_payment_model
 
 stripe.api_key = settings.STRIPE_TEST_SECRET_KEY
 
+#FBV per renderizzare la pagina di checkout di un acquisto
 @login_required
 def checkout(request, course_id):
     try:
@@ -28,6 +29,7 @@ def checkout(request, course_id):
         message = "Il corso è di tua proprietà!"
         messages.warning(request, message)
         return redirect("essential:createdcourses")
+    
     #Verifica Acquisti: Se l'utente ha già acquistato il corso, mostra un messaggio di avviso e reindirizza alla dashboard dell'utente.
     elif purchased:
         message = "Hai già acquistato questo corso!"

@@ -23,9 +23,7 @@ def reset_ids(tables):
 
 def erase_db():
 	
-	if "test" in sys.argv:
-		return
-	print("Cancello il DB")
+	print("Cancellazione DB!\n")
 	Purchase.objects.all().delete()
 	Payment.objects.all().delete()
 	Course.objects.all().delete()
@@ -34,8 +32,8 @@ def erase_db():
 	User.objects.all().delete()
 
 def init_db():
-	if "test" in sys.argv:
-		return
+
+	print("Creazione DB: ")
 	tables=["auth_user","essential_course","essential_lesson","users_profile","essential_purchase", "custom_payment_payment"]
 	reset_ids(tables)
 
@@ -45,6 +43,8 @@ def init_db():
 	with open(FILEPATH, encoding='utf-8') as f:
 		courses_data = json.load(f)
 
+	
+	print("  Creazione degli utenti...")
 	#Creazione superuser
 	admin = User.objects.create_superuser(username="admin", password="123")
 	admin.save()
@@ -66,6 +66,9 @@ def init_db():
 		g.user_set.add(coach) 
 		coach.save()
 
+	print("\t- Utenti creati con successo!")
+
+	print("  Creazione dei corsi...")
 	#Creazione corsi
 	categories = ["Principiante", "Intermedio", "Esperto"]
 	coaches =  list(Profile.objects.filter(user__username__in=utenti_coach))
@@ -87,7 +90,9 @@ def init_db():
 			l.title = lesson["titolo"]
 			l.course = c
 			l.save()
-             
+    
+	print("\t- Corsi creati con successo!")
+
 	#Creazione acquisti
 	free_courses = Course.objects.filter(price=0)
 	courses = list(free_courses)
@@ -102,7 +107,6 @@ def init_db():
 	customer_profiles = Profile.objects.filter(user__in=customer_users) 
 	users = list(customer_profiles)
 	n_users = customer_profiles.count()
-	print(n_users)
 
 	for j in range(n_users):
 		for _ in range(8):
@@ -114,4 +118,5 @@ def init_db():
 			except Exception as e:
 				pass
     
-	print("DUMP DB")
+
+	print("DB configurato correttamente!\n")

@@ -23,10 +23,11 @@ from .models import *
 from .forms import *
 from users.models import Profile
 
-
+#FBV che renderizza la home
 def tennis_home(request):
     return render(request, template_name="home.html")
 
+#CBV che mostra la lista dei corsi disponibili
 class CoursesListView(ListView):
     title = "Corsi disponibili"
     model = Course
@@ -90,6 +91,8 @@ class CoursesListView(ListView):
         context["livelli"] = ["Principiante", "Intermedio", "Esperto"]
         return context
 
+
+# View che invia risposte JSON, permettendo di cercare i coach a runtime con richieste AJAX
 def ajax_search_coaches(request):
     term = request.GET.get('q', '')
     coaches = list()
@@ -102,13 +105,11 @@ def ajax_search_coaches(request):
             if user.groups.filter(name="Coach").exists():
                 coaches.append(user)
 
-
-
-
     results = [{'id': coach.id, 'username': coach.username} for coach in coaches]
     print(results)
     return JsonResponse(results, safe=False)
 
+#CBV che mostra i dettagli di un singolo corso
 class CourseDetailView(DetailView):
     model = Course
     template_name = "course.html"
@@ -135,6 +136,7 @@ class CourseDetailView(DetailView):
         
         return context
 
+#FBV per il salvataggio di un corso, dopo un eventuale pagamento
 @login_required
 def save_course(request, course_id):
 
@@ -174,9 +176,20 @@ def save_course(request, course_id):
 
 #Views solo per i coach
 
+# Personalizzazione degli accessi alla viste
 class GroupRequiredMixin(AccessMixin):
     group_required = None
-    def test_func(self):
+
+    #Metodo che ...
+    #   quando si crea/modifica/elimina un corso o crea una lezione restituisce:
+    #   - TRUE  -> se l'id nel path corrisponde all'id di un corso creato dall'utente che fa la richiesta
+    #   - TRUE  -> quando l'utente loggato è un admin
+    #   - FALSE -> altrimenti
+    #   quando si modifica/elimina una lezione restituisce:
+    #   - TRUE  -> se l'id nel path corrisponde ad una lezione appartenente all'id di un corso creato dall'utente che fa la richiesta
+    #   - TRUE  -> se non si passa un id
+    #   - FALSE -> altrimenti
+    def check(self):
         if "lesson" in self.request.path and "create_lesson" not in self.request.path :
             lesson_id = self.kwargs.get('pk')
             lesson = get_object_or_404(Lesson, id=lesson_id)
@@ -190,13 +203,12 @@ class GroupRequiredMixin(AccessMixin):
             course = get_object_or_404(Course, id=id)
             return (course.user_id == self.request.user.id) or self.request.user.is_staff
 
-           
-    
+    #Se check restituisce False viene fatto il redirect alla pagina 403, altrimenti controllo il gruppo in group_required o admin, se non vi fanno parte -> "403"
     def dispatch(self, request, *args, **kwargs):
-        if not self.test_func():
+        if not self.check():
             return self.handle_no_permission()
         
-        user_groups = request.user.groups.values_list('name', flat=True)
+        user_groups = request.user.groups.values_list('name', flat=True) #estrae i nomi dei gruppi ai quali appartiene l'utente corrente (request.user) e li memorizza in una lista
         if (not set(self.group_required).intersection(set(user_groups))) and not self.request.user.is_staff:
             return self.handle_no_permission()
         
@@ -205,6 +217,7 @@ class GroupRequiredMixin(AccessMixin):
     def handle_no_permission(self) -> HttpResponseRedirect:
         return redirect('403')
 
+#CBV per mostrare la lista dei corsi creati da un "Coach", per poterli modificare
 class CreatedCoursesListView(GroupRequiredMixin, ListView):
     group_required = ["Coach"]
     template_name = "manage_courses.html"
@@ -224,7 +237,8 @@ class CreatedCoursesListView(GroupRequiredMixin, ListView):
             pass
         
         return queryset
-
+    
+#CBV per creare un corso, è necessario essere proprietari del corso o admin
 class CreateCourseView(GroupRequiredMixin, CreateView):
     group_required = ["Coach"]
     form_class = CreateCorsoForm
@@ -248,7 +262,8 @@ class CreateCourseView(GroupRequiredMixin, CreateView):
             return super().dispatch(request, *args, **kwargs)
         except Http404:
             return redirect("404")
-
+    
+#CBV per creare una lezione, eredita dalla precendente. Viene cambiato il form e il messaggio
 class CreateLessonView(CreateCourseView):
     form_class = CreateLessonForm
     success_message = "Lezione aggiunta con successo!"
@@ -276,7 +291,7 @@ class CreateLessonView(CreateCourseView):
 
         return super().form_valid(form)    
     
-        
+#CBV per cancellare un corso, è necessario essere proprietari del corso o admin
 class DeleteCourseView(GroupRequiredMixin, DeleteView):
     group_required = ["Coach"]
     template_name = "delete.html"
@@ -301,7 +316,7 @@ class DeleteCourseView(GroupRequiredMixin, DeleteView):
         except Http404:
             return redirect("404")
 
-
+#CBV per cancellare una lezione, eredita dalla precendente. Viene cambiato il modello e il messaggio
 class DeleteLessonView(DeleteCourseView):
     model = Lesson
     success_message = "Lezione eliminata con successo!"
@@ -319,6 +334,7 @@ class DeleteLessonView(DeleteCourseView):
         # Chiamare self.get_success_url() per ottenere l'URL di successo
         return redirect(reverse_lazy("essential:corso", kwargs={"pk": course_pk}))
 
+#CBV per aggiornare un corso, è necessario essere proprietari del corso o admin
 class UpdateCourseView(GroupRequiredMixin, UpdateView):
     group_required = ["Coach"]
     model = Course
@@ -339,7 +355,7 @@ class UpdateCourseView(GroupRequiredMixin, UpdateView):
         except Http404:
             return redirect("404")
 
-    
+#CBV per aggiornare una lezione, eredita dalla precendente. Viene cambiato il modello e il form
 class UpdateLessonView(UpdateCourseView):
     model = Lesson
     form_class = CreateLessonForm
@@ -351,5 +367,3 @@ class UpdateLessonView(UpdateCourseView):
         context = super().get_context_data(**kwargs)
         context["entita"] = "Lezione"
         return context
-    
-

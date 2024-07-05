@@ -9,6 +9,7 @@ from . import settings
 from django.template.loader import render_to_string
 import os
 
+#CBV per renderizzare la pagina di creazione di un Customer
 class UserCreateView(CreateView):
     #form_class = UserCreationForm
     form_class = CustomerCreationForm
@@ -19,7 +20,8 @@ class UserCreateView(CreateView):
         context = super().get_context_data(**kwargs)
         context["group"] = "Cliente"
         return context
-
+    
+#CBV che eredita dalla precedente, per renderizzare la pagina di creazione di un Coach
 class CoachCreateView(PermissionRequiredMixin, UserCreateView):
     permission_required = "is_staff"
     form_class = CoachCreationForm
@@ -29,7 +31,7 @@ class CoachCreateView(PermissionRequiredMixin, UserCreateView):
         context["group"] = "Coach"
         return context
 
-
+#Vista per autorizzare l'accesso ai media -> video
 def authorize_media_resource(request: HttpRequest) -> HttpResponse:
     resource = os.path.basename(request.path)
     if request.user.is_authenticated and request.user.profile.has_permession_auth(resource):
@@ -38,11 +40,11 @@ def authorize_media_resource(request: HttpRequest) -> HttpResponse:
         return serve(request, media_path, document_root, False)
     return redirect("403")
 
-
-
+#Vista per renderizzare la pagina 403
 def custom_403_view(request):
     return render(request, '403.html', status=403)
 
+#Vista per renderizzare la pagina 404
 def custom_404_view(request):
     return render(request, '404.html', status=404)
 
