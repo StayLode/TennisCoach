@@ -52,9 +52,9 @@ python manage.py makemigrations
 python manage.py migrate
 ```
 ### 5. Populate DB:
-Run the _setup.py_ file, which contains tools to erase and create the SQLite DB.
+Run the following file, which contains functions to setup a default environment with some users and courses
 ```bash
-python setup.pyì
+python setup.py
 ```
 
 ### 6. Start the server, only in development mode:
