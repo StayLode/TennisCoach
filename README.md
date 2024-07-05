@@ -14,7 +14,7 @@ This project aims to revolutionize tennis learning by creating a robust, scalabl
 
 **django-crispy-forms**==2.2; -> facilita la gestione dei form Django
 
-**django**-payments==2.0.0; -> fornisce un'astrazione comune per gestire pagamenti online con diversi provider di pagamento
+**django-payments**==2.0.0; -> fornisce un'astrazione comune per gestire pagamenti online con diversi provider di pagamento
 
 **moviepy**==1.0.3; -> libreria usata per gestire i video ed estrarne la lunghezza
 
