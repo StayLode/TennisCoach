@@ -72,7 +72,7 @@ def init_db():
 	for course in courses_data:
 		coach_id = random.randint(0,3)
 		category_val = random.randint(0,2)
-		picture_id = random.randint(1,5)
+		picture_id = random.randint(1,9)
 		c = Course()
 		c.title = course["titolo"]
 		c.description = course["descrizione"]

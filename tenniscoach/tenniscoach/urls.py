@@ -46,5 +46,5 @@ urlpatterns = [
     path("404/", custom_404_view, name='404'),
     re_path(r'^.*$', custom_404_view),
 ]
-erase_db()
+#erase_db()
 init_db()
