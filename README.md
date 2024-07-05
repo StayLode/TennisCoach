@@ -13,9 +13,13 @@ django-bootstrap5==24.2; -> integra Bootstrap 5 con Django
 django-braces==1.15.0 -> fornisce un insieme di mixins che facilitano l'implementazione di funzionalità comuni nelle viste class-based (CBV) di Django, come il controllo dell'appartenenza ad un gruppo.
 
 django-crispy-forms==2.2; -> facilita la gestione dei form Django
+
 django-payments==2.0.0; -> fornisce un'astrazione comune per gestire pagamenti online con diversi provider di pagamento
+
 moviepy==1.0.3; -> libreria usata per gestire i video ed estrarne la lunghezza
+
 pillow==10.4.0; -> libreria usata per l'elaborazione delle immagini
+
 stripe==10.1.0; -> SDK ufficiale di Stripe per Python, utilizzata per interagire con l'API di Stripe e gestire pagamenti
 
 ## Setup
