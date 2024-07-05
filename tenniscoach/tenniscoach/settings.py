@@ -158,7 +158,11 @@ PAYMENT_VARIANTS = {
 STRIPE_TEST_PUBLIC_KEY = 'pk_test_51PUn1dRvj7DKfmazYUL00PT9Q9FPPpExtVaZq1Noz4O3Couuy2aKZvnTFqpExZX7G7h4aiKvyr5FZ2Uu58mgxDdQ009MLCo3rX'
 STRIPE_TEST_SECRET_KEY = 'sk_test_51PUn1dRvj7DKfmazvogNOjjd9w5GrB1WTmZfsuSWVOfHUfY4MPOZvXIXpgxZW2lAB3xP3zda6uC0bNo6v92BoV8300k7YPBrBU'
 
+#Indirizzo dell'host dove l'applicazione è in esecuzione.
 PAYMENT_HOST = 'localhost'  # Sostituisci con il tuo dominio in produzione
-PAYMENT_USES_SSL = False  # Imposta su True in produzione con HTTPS
-SITE_ID = 1  # Assicurati che il SITE_ID sia impostato
-PAYMENT_MODEL = 'custom_payment.Payment'  # Usa il modello di pagamento predefinito di django-payments
+# Indica se SSL è utilizzato per le connessioni. In produzione, questo dovrebbe essere True per garantire che le transazioni siano sicure.
+PAYMENT_USES_SSL = False  
+# Identificatore del sito. Questa configurazione è utile se si utilizzano applicazioni multi-sito in Django.
+SITE_ID = 1  
+# Specifica il modello di pagamento da utilizzare
+PAYMENT_MODEL = 'custom_payment.Payment' 

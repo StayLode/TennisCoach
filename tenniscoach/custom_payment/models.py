@@ -13,3 +13,8 @@ class Payment(BasePayment):
     
     class Meta:
         verbose_name_plural = "Pagamenti"
+        """
+        constraints = [
+            UniqueConstraint(fields=['billing_first_name', 'description'], name='unique_courseid_username')
+        ]
+        """
