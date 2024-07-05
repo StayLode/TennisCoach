@@ -57,12 +57,12 @@ Run the following file, which contains functions to setup a default environment 
 python setup.py
 ```
 
-### 6. Start the server, only in development mode:
-Start the Django server:
+## Running
+### 1. Start the Django server:
 ```bash
 python manage.py runserver
 ```
-### 7. Usage
+### 2. Usage
 Once the server is running, you can access the online tennis courses.
 Go to http://localhost:8000/ and start exploring.
 
