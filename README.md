@@ -29,7 +29,7 @@ Follow these steps to set up and run the application:
 ### 1. Cloning
 ```bash
 git clone https://github.com/StayLode/TennisCoach.git
-cd TennisCOach
+cd TennisCoach
 ```
 ### 2. Install pipenv
 
@@ -53,6 +53,7 @@ python manage.py migrate
 ```
 ### 5. Populate DB:
 Uncomment line with erase_db in tenniscoach/urls.py. It will insert random entries in your SqliteDB.
+
 Once creation is finished, re-comment this line.
 
 ### 6. Start the server, only in development mode:
