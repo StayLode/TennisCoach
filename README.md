@@ -69,4 +69,5 @@ Go to http://localhost:8000/ and start exploring.
 - _Customer_: matteo, lode, nicholas, andrea
 - _Coach_: mezzanotte, prampolini, ugolini, menabue
 - _Admin_: admin
-_PASSWORD_ -> 123 -> per tutti gli utenti
+_PASSWORD_ -> 123
+-> per tutti gli utenti
