@@ -65,3 +65,8 @@ python manage.py runserver
 Once the server is running, you can access the online tennis courses and use the available features.
 Go to http://localhost:8000/ and start exploring.
 
+**Utenti di prova**
+- _Customer_: matteo, lode, nicholas, andrea
+- _Coach_: mezzanotte, prampolini, ugolini, menabue
+- _Admin_: admin
+_PASSWORD_ -> 123 -> per tutti gli utenti
