@@ -3,10 +3,9 @@ from django.urls import reverse_lazy
 from .forms import *
 from django.views.generic.edit import CreateView
 from django.contrib.auth.mixins import PermissionRequiredMixin
-from django.http import HttpRequest, HttpResponse, HttpResponseNotFound
+from django.http import HttpRequest, HttpResponse
 from django.views.static import serve
 from . import settings
-from django.template.loader import render_to_string
 import os
 
 #CBV per renderizzare la pagina di creazione di un Customer
