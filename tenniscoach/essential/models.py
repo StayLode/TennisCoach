@@ -3,6 +3,7 @@ import os
 from django.db.models.signals import post_save, post_delete
 
 from django.dispatch import receiver
+from django.forms import ValidationError
 from moviepy.editor import VideoFileClip
 from django.utils import timezone
 from users.models import Profile
@@ -10,6 +11,9 @@ from django.core.validators import MinValueValidator
 from django.db.models import UniqueConstraint
 
 
+def validate_mp4_file(value):
+    if not value.name.endswith('.mp4'):
+        raise ValidationError('Il file deve essere un video MP4.')
 
 
 class Course(models.Model):
@@ -47,12 +51,13 @@ class Lesson(models.Model):
     Entity that models a lesson.
     """
     course = models.ForeignKey(Course,on_delete=models.CASCADE)
-    title = models.CharField(max_length=50)
+    title = models.CharField(max_length=100)
     duration = models.DurationField(blank=True, null=True)
     video = models.FileField(
         upload_to='courses_videos/',
         default=os.path.join('videos', 'unknown_video.mp4'),
-        blank=True
+        blank=True,
+        validators=[validate_mp4_file]
     ) 
     
     def save(self, *args, **kwargs):

@@ -52,7 +52,7 @@
             {% else %}
             <h1>Unisciti ai nostri corsi di tennis online!</h1>
             <p>Visita il sito e inizia a migliorare il tuo gioco oggi stesso!</p>
-            <p><a class="btn" href="register"><span>Sign Up</span></a></p>
+            <p><a class="btn" href="{% url 'register' %}"><span>Sign Up</span></a></p>
             {% endif %}
           </div>
         </div>
@@ -71,7 +71,7 @@
             {% else %}
             <h1>Accedi al profilo</h1>
             <p>... e continua il percorso coi nostri corsi!</p>
-            <p><a class="btn" href="login"><span>Log In</span></a></p>
+            <p><a class="btn" href="{% url 'login' %}"><span>Log In</span></a></p>
             {%endif%}
           </div>
         </div>

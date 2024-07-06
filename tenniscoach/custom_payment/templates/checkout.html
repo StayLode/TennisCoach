@@ -66,6 +66,7 @@
         
         const form = document.getElementById('payment-form');
         form.addEventListener('submit', async (event) => {
+            event.preventDefault();
             const cardholderName = document.getElementById('cardholder-name').value;
             if (!cardholderName) {
                 document.getElementById('card-errors').textContent = "Il campo Titolare della carta è obbligatorio.";

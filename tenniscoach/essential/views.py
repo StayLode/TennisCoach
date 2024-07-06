@@ -340,8 +340,10 @@ class UpdateCourseView(GroupRequiredMixin, UpdateView):
     model = Course
     template_name = "edit.html"
     form_class = CreateCorsoForm
+    success_message = "Corso modificato con successo!"
 
     def get_success_url(self):
+        messages.success(self.request, self.success_message)
         return reverse_lazy("essential:corso", kwargs={'pk': self.object.pk})
     
     def get_context_data(self, **kwargs: Any):
@@ -359,8 +361,10 @@ class UpdateCourseView(GroupRequiredMixin, UpdateView):
 class UpdateLessonView(UpdateCourseView):
     model = Lesson
     form_class = CreateLessonForm
+    success_message = "Lezione modificata con successo!"
 
     def get_success_url(self):
+        messages.success(self.request, self.success_message)
         return reverse_lazy("essential:corso", kwargs={'pk': self.object.course.pk})
     
     def get_context_data(self, **kwargs: Any):
