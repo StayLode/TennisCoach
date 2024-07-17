@@ -150,12 +150,12 @@ LOGIN_URL = "/login/?auth=notok" #redireziona al login, ma con un parametro GET
 PAYMENT_VARIANTS = {
     'stripe': ('payments.stripe.StripeProvider', {
         'secret_key': '__YOUR_STRIPE_SECRET_KEY__',
-        'public_key': '__YOUR_STRIPE_SECRET_KEY__',
+        'public_key': '__YOUR_STRIPE_PUBLIC_KEY__',
     }),
 }
 
 # Configurazione per usare carte di prova
-STRIPE_TEST_PUBLIC_KEY = '__YOUR_STRIPE_SECRET_KEY__'
+STRIPE_TEST_PUBLIC_KEY = '__YOUR_STRIPE_PUBLIC_KEY__'
 STRIPE_TEST_SECRET_KEY = '__YOUR_STRIPE_SECRET_KEY__'
 
 #Indirizzo dell'host dove l'applicazione è in esecuzione.
