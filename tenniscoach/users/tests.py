@@ -10,11 +10,9 @@ class PermissionAuthTestCase(TestCase):
     def setUp(self):
         # Crea un utente di prova
         self.user = User.objects.create_user(username='users', password='testpass')
-        #self.profile = Profile.objects.create(user=self.user, name='Test', surname='User', email='testuser@example.com')
         self.profile = Profile.objects.get(user=self.user)
 
         # Crea un secondo utente di prova
-         
         self.user2 = User.objects.create_user(username='other', password='otherpass')
         self.profile2 = Profile.objects.get(user=self.user2)
 
@@ -37,7 +35,6 @@ class PermissionAuthTestCase(TestCase):
         )
         
         # Crea una lezione di prova associata al corso
-
         self.lesson = Lesson.objects.create(
             course=self.course,
             title='Test Lesson',
@@ -57,6 +54,7 @@ class PermissionAuthTestCase(TestCase):
             course=self.course
         )
 
+        # Crea una lezione, aggiunta al corso appena acquistato
         self.lesson3 = Lesson.objects.create(
             course=self.course,
             title='Other Lesson',
@@ -84,6 +82,6 @@ class PermissionAuthTestCase(TestCase):
         self.assertFalse(result)
 
     def test_has_permission_auth_course_added_after_purchase(self):
-        # Verifica che la funzione ritorna True quando il corso è stato acquistato dall'utente
+        # Verifica che la funzione ritorna True quando il corso è stato acquistato dall'utente, e la lezione è stata aggiunta dopo l'acquisto
         result = self.profile.has_permession_auth('unknown_video3.mp4')
         self.assertTrue(result)

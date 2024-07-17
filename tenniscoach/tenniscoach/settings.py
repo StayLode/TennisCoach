@@ -149,14 +149,14 @@ LOGIN_URL = "/login/?auth=notok" #redireziona al login, ma con un parametro GET
 
 PAYMENT_VARIANTS = {
     'stripe': ('payments.stripe.StripeProvider', {
-        'secret_key': '__YOUR_STRIPE_SECRET_KEY__',
-        'public_key': '__YOUR_STRIPE_PUBLIC_KEY__',
+        'secret_key': 'sk_test_51PUn1dRvj7DKfmazvogNOjjd9w5GrB1WTmZfsuSWVOfHUfY4MPOZvXIXpgxZW2lAB3xP3zda6uC0bNo6v92BoV8300k7YPBrBU',
+        'public_key': 'pk_test_51PUn1dRvj7DKfmazYUL00PT9Q9FPPpExtVaZq1Noz4O3Couuy2aKZvnTFqpExZX7G7h4aiKvyr5FZ2Uu58mgxDdQ009MLCo3rX',
     }),
 }
 
 # Configurazione per usare carte di prova
-STRIPE_TEST_PUBLIC_KEY = '__YOUR_STRIPE_PUBLIC_KEY__'
-STRIPE_TEST_SECRET_KEY = '__YOUR_STRIPE_SECRET_KEY__'
+STRIPE_TEST_PUBLIC_KEY = 'pk_test_51PUn1dRvj7DKfmazYUL00PT9Q9FPPpExtVaZq1Noz4O3Couuy2aKZvnTFqpExZX7G7h4aiKvyr5FZ2Uu58mgxDdQ009MLCo3rX'
+STRIPE_TEST_SECRET_KEY = 'sk_test_51PUn1dRvj7DKfmazvogNOjjd9w5GrB1WTmZfsuSWVOfHUfY4MPOZvXIXpgxZW2lAB3xP3zda6uC0bNo6v92BoV8300k7YPBrBU'
 
 #Indirizzo dell'host dove l'applicazione è in esecuzione.
 PAYMENT_HOST = 'localhost'  # Sostituisci con il tuo dominio in produzione

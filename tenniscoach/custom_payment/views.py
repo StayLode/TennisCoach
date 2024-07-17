@@ -36,6 +36,12 @@ def checkout(request, course_id):
         messages.warning(request, message)
         return redirect("users:dashboard")
     
+    #Verifica Costo: Se il corso inserito non necessita di un pagamento, in quanto gratuito, mostra un messaggio d'avviso e reindirizza alla lista dei corsi
+    elif course.price == 0:
+        message = "Il corso non necessita di pagamento"
+        messages.warning(request, message)
+        return redirect("essential:courseslist")
+    
     Payment = get_payment_model()
 
     if request.method == 'POST':

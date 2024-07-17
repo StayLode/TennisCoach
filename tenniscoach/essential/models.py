@@ -73,8 +73,6 @@ class Lesson(models.Model):
                 Lesson.objects.filter(pk=self.pk).update(duration=self.duration)
             except OSError as e:
                 print(f"Errore nel caricare il video: {e}")
-
-
    
     class Meta:
         verbose_name_plural = "Lezioni"

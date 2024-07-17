@@ -106,7 +106,7 @@ def ajax_search_coaches(request):
                 coaches.append(user)
 
     results = [{'id': coach.id, 'username': coach.username} for coach in coaches]
-    print(results)
+    #print(results)
     return JsonResponse(results, safe=False)
 
 #CBV che mostra i dettagli di un singolo corso
@@ -280,13 +280,13 @@ class CreateLessonView(CreateCourseView):
     def form_valid(self, form):
         # Ottieni il course_id dalla richiesta
         course_id = self.kwargs.get('course_id')
-        # Assegna il course_id al form prima di salvarlo
 
-        course = get_object_or_404(Course, pk=course_id)
+        """course = get_object_or_404(Course, pk=course_id)
         if course.user_id != self.request.user.id:
-            return redirect("404")
+            return redirect("404")"""
         
-
+        
+        # Assegna il course_id al form prima di salvarlo
         form.instance.course_id = course_id
 
         return super().form_valid(form)    

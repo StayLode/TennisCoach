@@ -25,12 +25,12 @@ class OptionalFieldsMixin:
 
 class UserProfileForm(OptionalFieldsMixin, forms.ModelForm):
     name = forms.CharField(
-        max_length=30,
+        max_length=20,
         validators=[validate_name],
         widget=forms.TextInput(attrs={'class': 'form-control'})
     )
     surname = forms.CharField(
-        max_length=30,
+        max_length=20,
         validators=[validate_surname],
         widget=forms.TextInput(attrs={'class': 'form-control'})
     )
@@ -46,5 +46,11 @@ class UserProfileForm(OptionalFieldsMixin, forms.ModelForm):
             'picture': 'Immagine del profilo',
         }
         widgets ={
-            'description': forms.Textarea(attrs={'cols': 80, 'rows': 3})
+            'description': forms.Textarea(attrs={'cols': 80, 'rows': 3}),
+            'picture': forms.FileInput(attrs={'class': 'form-control'})
         }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        if 'picture' in self.fields:
+            self.fields['picture'].widget.attrs.pop('clear', None)
